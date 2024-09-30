@@ -1,1 +1,10 @@
 ﻿.vs
+Common/bin
+Common/obj
+SampleProject/bin
+SampleProject/obj
+SampleProject.Repository/bin
+SampleProject.Repository/obj
+SampleProject.Service/bin
+SampleProject.Service/obj
+SampleProject/logs
