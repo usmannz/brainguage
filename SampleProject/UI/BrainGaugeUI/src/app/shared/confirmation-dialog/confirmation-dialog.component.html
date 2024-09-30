@@ -1,0 +1,20 @@
+<h1 mat-dialog-title class="h1 card-header mb-0 --delete-modal-header p-3">
+  {{ _data.title }}
+  <a (click)="closeDialog()" class="cross-icon cursor-hand"><i class="ri-close-fill"></i></a>
+
+</h1>
+
+<div class="custom-form">
+  <div class="modal-body modal-center-scroll">
+    <p class="mb-0">{{ _data.message }}</p>
+  </div>
+  <div class="modal-footer border-0">
+    <button mat-button value="Cancel" class="btn btn-light mr-2 btn-width-120" [mat-dialog-close]="false"
+      cdkFocusInitial>
+      Cancel
+    </button>
+    <button mat-button value="Confirm" class="btn btn-danger btn-width-120" [mat-dialog-close]="true" cdkFocusInitial>
+      Ok
+    </button>
+  </div>
+</div>

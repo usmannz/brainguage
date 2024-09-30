@@ -13,6 +13,10 @@ export class Helper {
             show: false
         },
         {
+            name: SideMenu.Questions,
+            show: false
+        },
+        {
             name: SideMenu.Admin,
             show: false
         },

@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -28,7 +28,17 @@ import { PasswordToggleDirective } from './directives/password-toggle.directive'
 import { TruncateTextDirective } from './directives/truncate-text.directive';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
-import { Questionsomponent } from './pages/Questions/questions.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
+import { PaginationComponent } from './pages/pagination/pagination.component';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select'; // if you're using selects
+import {MatDialogModule} from '@angular/material/dialog';
+import { QuestionEditComponent } from './pages/question-edit/question-edit.component';
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -44,11 +54,16 @@ import { Questionsomponent } from './pages/Questions/questions.component';
     ClipboardModule,
     CookieModule.forRoot(),
     ReactiveFormsModule,
+    MatExpansionModule,
     ToastrModule.forRoot({
       // Configure global options here
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule, // if necessary
+    MatDialogModule
 
   ],
   declarations: [
@@ -56,7 +71,7 @@ import { Questionsomponent } from './pages/Questions/questions.component';
     AdminLayoutComponent,
     AuthLayoutComponent,
     DashboardComponent,
-    Questionsomponent,
+    QuestionsComponent,
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
@@ -64,15 +79,25 @@ import { Questionsomponent } from './pages/Questions/questions.component';
     LoginComponent,
     PasswordToggleDirective,
     TruncateTextDirective,
+    PaginationComponent,
+    QuestionEditComponent,
+    ConfirmationDialogComponent
+
 
   ],
   providers: [AuthGuard,{ provide: LocationStrategy, useClass: PathLocationStrategy},
     CookieService,
     UserService,
     ContextService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     provideAnimations(), // required animations providers
 
   ],
+  entryComponents: [
+    QuestionEditComponent,
+
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

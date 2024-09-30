@@ -11,9 +11,9 @@ namespace SampleProject.Common.Entities
 {
     public class UserRoles : IEntity
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [ForeignKey("Users")]
-        public Guid UsersId { get; set; }
+        public int UsersId { get; set; }
         [ForeignKey("Roles")]
         public int RoleId { get; set; }
 

@@ -37,3 +37,16 @@ CREATE TABLE `roles` (
 );
 INSERT INTO `brainguage`.`Roles` (`Name`) VALUES ('Admin');
 INSERT INTO `brainguage`.`Roles` (`Name`) VALUES ('User');
+
+CREATE TABLE `questions` (
+  `Id` CHAR(36) PRIMARY KEY,
+  `question` varchar(5000) DEFAULT NULL,
+  `answer` varchar(5000) ,
+  `IsDeleted` bit(1) DEFAULT b'0',
+  `CreateStamp` datetime DEFAULT NULL,
+  `CreatedBy` int DEFAULT NULL,
+  `UpdatedBy` int DEFAULT NULL,
+  `DeletedBy` int DEFAULT NULL,
+  `UpdateStamp` datetime DEFAULT NULL,
+  `DeleteStamp` datetime DEFAULT NULL
+  );

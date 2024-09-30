@@ -64,17 +64,11 @@ export class BaseComponent {
             this._contextService.logout();
             return;
         }
-        // let roleCheck = this.contextService._userRoles.filter(item => this._pageAccessLevel.some(o2 => item.roleId === o2));
-        let roleCheck = [];
-
-        if(!this.tenantStatus)
-        {
-         this.tenantInActiveAccess();
-        }
+        let roleCheck = this.contextService._userRoles.filter(item => this._pageAccessLevel.some(o2 => item.roleId === o2));
 
         if(roleCheck.length ==0)
         {
-        this._router.navigate(['/projects'])
+        this._router.navigate(['/dashboard'])
         }
         //// check token expiry
         var currentTime = new Date().getTime() / 1000;
@@ -143,19 +137,6 @@ export class BaseComponent {
         }
       }
 
-      tenantInActiveAccess()
-      {
-        var routerlink =this._router.url.replace(/\//g, "");
-        switch (routerlink) {
-          case 'profile': {
-            this._router.navigate(['/profile'])    
-            }
-        break;
-        default: {
-          this._router.navigate(['/settings'])    
-          break;
-        }
-      }      }
       
       hideEmailBanner(event:any)
       {

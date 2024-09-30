@@ -8,11 +8,11 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './services/authguard';
 import { LoginComponent } from './pages/login/login.component';
-import { Questionsomponent } from './pages/Questions/questions.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
 
 const routes: Routes =[
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent,canActivate: [AuthGuard]  },
-  { path: 'questions', pathMatch: 'full', component: Questionsomponent,canActivate: [AuthGuard]  },
+  { path: 'questions', pathMatch: 'full', component: QuestionsComponent,canActivate: [AuthGuard]  },
   { path: 'login', component: LoginComponent },
   { path: '**', component: DashboardComponent,canActivate: [AuthGuard] },
 

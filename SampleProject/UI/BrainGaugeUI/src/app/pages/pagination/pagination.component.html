@@ -1,0 +1,48 @@
+<div *ngIf="showPagination">
+
+    <div class="form-group page-items float-left mb-0">
+        <label> Items Per Page </label>
+        <select class="form-control form-control-sm w-auto d-inline-block mr-2"
+            (change)="onchangePageSize($event.target.value)">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option selected value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+
+        </select>
+    </div>
+
+    <div class="custom-pager float-right">
+        <!-- <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls> -->
+        <div class="custom-pager-inner d-flex">
+
+            <a [style.pointer-events]="!firstPageVisibility ?'none':'auto'" (click)="onchangePageIndex(1)"
+                class="pager-a cursor-hand" [ngClass]="!firstPageVisibility ?'first-page-class':''"><i
+                    class="ri-skip-back-line"></i></a>
+            <a [style.pointer-events]="!firstPageVisibility ?'none':'auto'" (click)="onchangePageBackword()"
+                class="pager-a cursor-hcursor-hand plus-minus-iconsand"
+                [ngClass]="!firstPageVisibility ?'first-page-class':''"><i class="ri-arrow-left-s-line"></i></a>
+
+            <div class="pager-page-select d-flex align-items-center ml-2 mr-2">
+                <p class="m-0">Goto Page</p>
+                <select class="form-control form-control-sm w-auto d-inline-block" [value]="currentPage"
+                    (change)="onchangePageIndex($event.target.value)">
+                    <ng-container *ngIf=totalPages>
+                    <ng-container  *ngFor="let in of counter(totalPages) ;let pageIndex = index">
+                        <option [value]="pageIndex+1">{{pageIndex+1}}</option>
+                    </ng-container>
+                </ng-container>
+                </select>
+            </div>
+
+            <a [style.pointer-events]="!lastPageVisibility ?'none':'auto'" (click)="onchangePageForward()"
+                class="pager-a cursor-hand" [ngClass]="!lastPageVisibility ?'first-page-class':''"><i
+                    class="ri-arrow-right-s-line"></i></a>
+            <a [style.pointer-events]="!lastPageVisibility ?'none':'auto'" (click)="onchangePageIndex(totalPages)"
+                class="pager-a cursor-hand" [ngClass]="!lastPageVisibility ?'first-page-class':''"><i
+                    class="ri-skip-forward-line"></i></a>
+
+        </div>
+    </div>
+</div>

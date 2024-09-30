@@ -9,16 +9,11 @@ using System.Threading.Tasks;
 
 namespace SampleProject.Common.Entities
 {
-public class Users : IEntity
+public class Questions : IEntity
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Address { get; set; }
-        public string ContactPhoneNumber { get; set; }
-        public int StatusId { get; set; }
+        public string Question { get; set; } =  string.Empty;
+        public string Answer { get; set; }  =  string.Empty;
         public bool IsDeleted { get; set; }
         public DateTime CreateStamp { get; set; }
         public DateTime? UpdateStamp { get; set; }
@@ -26,14 +21,19 @@ public class Users : IEntity
         public int? CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
         public int? DeletedBy { get; set; }
-        public bool isEmail { get; set; }
-        public virtual ICollection<UserRoles> UserRoles { get; set; } // Navigation property
     }
 
-    public class LoginUser
+    public class ViewQuestionListing : IEntity
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public int Id { get; set; }
+        public string Question { get; set; } =  string.Empty;
+        public string Answer { get; set; }  =  string.Empty;
     }
 
+
+    public class ViewModelQuestionListing
+    {
+        public List<ViewQuestionListing> Questions = new List<ViewQuestionListing>();
+        public int Count { get; set; }
+    }
 }

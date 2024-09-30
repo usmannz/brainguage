@@ -165,6 +165,8 @@ namespace SampleProject.API
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
 
         }
 

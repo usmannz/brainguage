@@ -1,0 +1,135 @@
+﻿using Microsoft.EntityFrameworkCore;
+using SampleProject.Common;
+using SampleProject.Common.Entities;
+using SampleProject.Common.Models;
+using SampleProject.Repository.Contracts;
+using SampleProject.Repository.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SampleProject.Repository
+{
+    public class QuestionRepository : Repository<Questions, DBContext>, IQuestionRepository
+    {
+        public QuestionRepository(
+            DBContext context
+            // CacheHelper cacheHelper
+            ) : base(context)
+        {
+            // _cacheHelper = cacheHelper;
+        }
+
+        public async Task<ViewModelQuestionListing> GetAllQuestions(Pager pagination)
+        {
+            ViewModelQuestionListing listQuestions = new ViewModelQuestionListing();
+
+            // Start with a queryable context for questions
+            var query = _context.Questions.AsQueryable();
+
+            if (query.Any())
+            {
+                // Apply filtering
+                if (!string.IsNullOrEmpty(pagination.FilterText))
+                {
+                    query = query.Where(q => q.Question.Contains(pagination.FilterText));
+                }
+
+                // Get the total count of filtered questions
+                listQuestions.Count = await query.CountAsync();
+
+                // Apply sorting based on the provided SortByField and SortDirection
+                if (!string.IsNullOrEmpty(pagination.SortByField))
+                {
+                    if (pagination.SortDirection == (int)SortDirection.Asc)
+                    {
+                        query = query.OrderBy(pagination.SortByField); // Sort ascending
+                    }
+                    else if (pagination.SortDirection == (int)SortDirection.Desc)
+                    {
+                        query = query.OrderBy($"{pagination.SortByField} descending"); // Sort descending
+                    }
+                }
+
+                // Apply pagination
+                var pagedQuestions = await query
+                    .Skip(pagination.SkipBy)
+                    .Take(pagination.PageSize)
+                    .ToListAsync();
+
+                // Populate the list of questions
+                listQuestions.Questions = pagedQuestions.Select(x => new ViewQuestionListing()
+                {
+                    Id = x.Id,
+                    Question = x.Question,
+                    Answer = x.Answer,
+                }).ToList();
+            }
+
+            return listQuestions;
+        }
+public async Task<int> SaveQuestion(Questions question)
+        {
+
+            if (question.Id == 0)
+            {
+
+                var entityCheck = _context.Questions.AsNoTracking().FirstOrDefault(item => item.Question == question.Question && !item.IsDeleted);
+                if (entityCheck != null)
+                {
+                    return await Task.FromResult(-1);
+                }
+                else
+                {
+                    _context.Questions.Add(question);
+                    await _context.SaveChangesAsync();
+                    return question.Id;
+                }
+            }
+
+            else if (question.Id != 0)
+
+            {
+                var entityCheck = _context.Questions.AsNoTracking().FirstOrDefault(item => item.Question == question.Question && item.Id != question.Id && !item.IsDeleted);
+                if (entityCheck != null)
+                {
+                    return await Task.FromResult(-1);
+                }
+                else
+                {
+                    var questionEntity = _context.Questions.SingleOrDefault(item => item.Id == question.Id && !item.IsDeleted);
+                    questionEntity.Question = question.Question;
+                    questionEntity.Answer = question.Answer;
+                    questionEntity.UpdateStamp = question.UpdateStamp;
+                    questionEntity.UpdatedBy = question.UpdatedBy;
+                    _context.Questions.Update(questionEntity);
+                    await _context.SaveChangesAsync();
+                    return questionEntity.Id;
+                }
+            }
+            else
+            {
+                return await Task.FromResult(-1);
+
+            }
+        }
+   
+     public async Task<int> DeleteQuestion(int questionId, int deletedBy)
+        {
+
+            
+            var question = _context.Questions.Where(x => x.Id == questionId).SingleOrDefault();
+
+            question.IsDeleted = true;
+            question.DeletedBy = deletedBy;
+            question.DeleteStamp = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return question.Id;
+        }
+
+   
+    }
+}

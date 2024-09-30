@@ -13,6 +13,7 @@ namespace SampleProject.Repository
         public virtual DbSet<Users> Users { get; set; }
           public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Questions> Questions { get; set; }
 
 
     public DBContext()
