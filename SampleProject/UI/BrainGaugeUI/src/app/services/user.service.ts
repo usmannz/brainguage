@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../entities/user';
+import { SignUp, User } from '../entities/user';
 import { Settings } from '../helpers/settings';
 
 @Injectable({
@@ -17,6 +17,11 @@ export class UserService {
     authenticate(user: User): Observable<any> {
         return this._http.post<User>(`${Settings.apiBase}users/auth`, user);
     }
+    getAllDropDownUsers(): Observable<any> {
+        return this._http.get<any>(`${Settings.apiBase}users/getAllDropDownUsers`);
+    }
+    signUpUser(signUp: SignUp): Observable<number> {
+        return this._http.post<any>(`${Settings.apiBase}users/signUpUser`,signUp);
+    }
 
-   
 }

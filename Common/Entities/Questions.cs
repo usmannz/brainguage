@@ -21,6 +21,8 @@ public class Questions : IEntity
         public int? CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
         public int? DeletedBy { get; set; }
+        public virtual ICollection<QuestionsAssignment> QuestionsAssignment { get; set; } // Navigation property
+
     }
 
     public class ViewQuestionListing : IEntity
@@ -34,6 +36,22 @@ public class Questions : IEntity
     public class ViewModelQuestionListing
     {
         public List<ViewQuestionListing> Questions = new List<ViewQuestionListing>();
+        public int Count { get; set; }
+    }
+
+    public class ViewUserQuestionListing : IEntity
+    {
+        public int Id { get; set; }
+        public string Question { get; set; } = string.Empty;
+        public string Answer { get; set; } = string.Empty;
+        public bool IsAssigned { get; set; } = false;
+
+    }
+
+
+    public class ViewModelUserQuestionListing
+    {
+        public List<ViewUserQuestionListing> Questions = new List<ViewUserQuestionListing>();
         public int Count { get; set; }
     }
 }

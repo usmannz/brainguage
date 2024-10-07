@@ -8,7 +8,6 @@ using SampleProject.Service.Contracts;
 
 namespace SampleProject.Controllers
 {
-    [ApiController]
     [Authorize, Route("api/users")]
     public class UsersController : ControllerBase
     {
@@ -52,11 +51,17 @@ namespace SampleProject.Controllers
             return Ok(new { jwt = Jwt.Create(response), role = response.UserRoles, isEmail =response.isEmail, success = 1});
         }
 
-        [HttpGet(Name = "GetAllUsers")]
-        public async Task <ApiResponse<List<Users>>> Get()
+        [HttpGet("GetAllDropDownUsers")]
+        public async Task <ApiResponse<List<UserDropDown>>> GetAllDropDownUsers()
         {
-            return await _userService.GetAllUsers();
+            return await _userService.GetAllDropDownUsers();
 
+        }
+
+        [AllowAnonymous,HttpPost("SignUpUser")]
+        public async Task<IActionResult> SignUpUser([FromBody] SignUp signUp)
+        {        
+            return Ok(await _userService.SignUpUser(signUp));
         }
     }
 }

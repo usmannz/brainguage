@@ -9,7 +9,6 @@ using SampleProject.Service.Contracts;
 
 namespace SampleProject.Controllers
 {
-    [ApiController]
     [Authorize, Route("api/questions")]
     public class QuestionsController : BaseController
     {
@@ -22,7 +21,7 @@ namespace SampleProject.Controllers
             _questionService = questionService;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin"),HttpPost("GetAllQuestions")] 
         public async Task <ApiResponse<ViewModelQuestionListing>> GetAllQuestions([FromBody] Pager pagination)
         {
             return await _questionService.GetAllQuestions(pagination);
@@ -35,10 +34,24 @@ namespace SampleProject.Controllers
             return Ok(await _questionService.SaveQuestion(question,UserId));
         }
         [Authorize(Roles = "Admin"), HttpDelete("{questionId}")]
-        public async Task<IActionResult> DeleteQuuestion(int questionId)
+        public async Task<IActionResult> DeleteQuestion(int questionId)
         {
             int deletedBy = this.User.GetUserId();
             return Ok(await _questionService.DeleteQuestion(questionId, deletedBy));
+        }
+        [Authorize(Roles = "Admin,User"),HttpPost("GetAllUsersQuestions/{userId}")]
+        public async Task<ApiResponse<ViewModelUserQuestionListing>> GetAllUsersQuestions([FromBody] Pager pagination,int userId)
+        {
+            if (userId == 0)
+                userId = UserId;
+            return await _questionService.GetAllUsersQuestions(pagination, userId);
+        }
+
+         [Authorize(Roles = "Admin"),HttpPost("AssignQuestions")]        
+        public async Task<IActionResult> AssignQestions([FromBody] List<QuestionsAssignment> question)
+        {
+            
+            return Ok(await _questionService.AssignQestions(question,UserId));
         }
     }
 }

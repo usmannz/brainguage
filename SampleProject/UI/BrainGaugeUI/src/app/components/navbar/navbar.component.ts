@@ -14,6 +14,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
+  public username = "";
   constructor(protected _contextService: ContextService,
     protected _router: Router,
 location: Location,  private element: ElementRef) {
@@ -23,6 +24,8 @@ location: Location,  private element: ElementRef) {
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+   this.username = this._contextService.CurrentUserName;
+   console.log(this.username)
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -35,7 +38,7 @@ location: Location,  private element: ElementRef) {
             return this.listTitles[item].title;
         }
     }
-    return 'Dashboard';
+    return 'Questions';
   }
 
   btnLogout_Clicked()

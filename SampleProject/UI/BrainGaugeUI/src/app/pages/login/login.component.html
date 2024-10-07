@@ -3,8 +3,8 @@
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Welcome!</h1>
-          <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p>
+          <!-- <h1 class="text-white">Welcome!</h1> -->
+          <!-- <p class="text-lead text-light">To BRAIN GUAGE.</p> -->
         </div>
       </div>
     </div>
@@ -15,7 +15,6 @@
     </svg>
   </div>
 </div>
-<!-- Page content -->
 <div class="container mt--8 pb-5">
   <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7">
@@ -39,8 +38,8 @@
           </div> -->
           <form [formGroup]="loginForm" class="form-signin">
             <div class="text-center loginbox-logo">
-                <!-- <img class="mb-5 mt-4 " src="assets/images/logo.png" class="img-fluid"
-                    style="max-width: 200px; margin: 10px auto 30px; display: table;" alt=""> -->
+                <img class="mb-5 mt-4 " src="assets/img/brand/red.png" class="img-fluid"
+                    style="max-width: 200px; margin: 10px auto 30px; display: table;" alt="">
             </div>
             <div class="clearfix"></div>
             <div class="form-group">
@@ -68,35 +67,35 @@
                 </div>
             </div>
             <div class="checkbox mb-3">
-                <!-- <label>
-                    <input  formControlName="rememberMe" type="checkbox" value="remember-me"> Remember me
-                </label> -->
                 <label class="custom-container"> Remember me
                     <input formControlName="rememberMe" type="checkbox" value="remember-me">
                     <span class="custom-checkmark"></span>
                 </label>
             </div>
-            <button class="btn btn-lg btn-danger btn-block" type="submit" (click)="btnLogin_Clicked()"
-                [disabled]="isLoginInProgress">
-                LOGIN
-                <i class="fa fa-spinner fa-spin" *ngIf="isLoginInProgress"></i>
-            </button>
+            <div  class="row">
+              <div class="text-left col-6">
+                <button  routerLink="/register"  type="button" class="btn btn-primary login-btn-size">Register</button>
+              </div>
+              <div class="text-right col-6">
+                <button (click)="btnLogin_Clicked()" [disabled]="isLoginInProgress" type="button" class="btn btn-primary login-btn-size">Login<i class="fa fa-spinner fa-spin" *ngIf="isLoginInProgress"></i></button>
+              </div>
+          </div>
+           
             <!-- <a (click)="btnForgetPassword_Clicked()" class="mt-4 text-muted  d-block text-center "
                 href="javascript:">Forgot Password?</a>
             <a (click)="btnUserSignUp_Clicked()" class="mt-2 mb-3 text-muted  d-block text-center "
                 href="javascript:">Contact us</a> -->
-
         </form>
         </div>
       </div>
-      <div class="row mt-3">
+      <!-- <div class="row mt-3">
         <div class="col-6">
           <a href="javascript:void(0)" class="text-light"><small>Forgot password?</small></a>
         </div>
         <div class="col-6 text-right">
-          <a href="javascript:void(0)" class="text-light"><small>Create new account</small></a>
+          <a routerLink="/register" class="text-light"><small>Create new account</small></a>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

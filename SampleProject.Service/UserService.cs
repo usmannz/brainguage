@@ -37,28 +37,59 @@ namespace SampleProject.Service
             return user;
         }
         
-        public async Task<ApiResponse<List<Users>>> GetAllUsers()
+        public async Task<ApiResponse<List<UserDropDown>>> GetAllDropDownUsers()
         {
-            var cacheUser = _cacheHelper.GetUsersAll();
-            if (cacheUser == null)
-            {
-                var listUsers = await _userRepository.GetAllUsers();
-
-                BackgroundJob.Enqueue(() => _cacheHelper.AddUsersAll(listUsers.Data));
-                return listUsers;
-
-            }
-            else
-            {
-                return new ApiResponse<List<Users>>
+                try
+                {
+                var listUsers = await _userRepository.GetAllDropDownUsers();
+                return new ApiResponse<List<UserDropDown>>
                 {
                     Status = new ApiResponseStatus { Code = 200, Message = "Success" },
-                    Data = cacheUser
+                    Data = listUsers
                 };
-
+                }
+                catch (Exception ex)
+            {
+                return new ApiResponse<List<UserDropDown>>
+                {
+                    Status = new ApiResponseStatus { Code = 500, Message = "Internal Server Error" },
+                    Data = new List<UserDropDown>() // Return an empty list in case of error
+                };
             }
+
+            
             //var listUsers = await _userRepository.GetAllUsers();
             //return await Task.FromResult<ApiResponse<List<Users>>>(listUsers);
+        }
+
+        public async Task<ApiResponse<int>> SignUpUser(SignUp signUp)
+        {
+
+            Users user = new Users();
+            user.FirstName = signUp.FirstName.Trim();
+            user.LastName = signUp.LastName.Trim();
+            user.Email =  signUp.Email.Trim();
+            user.Password = user.Password = Encryption.Encrypt(signUp.Password.Trim());
+            user.CreateStamp = user.CreateStamp = DateTime.UtcNow;
+            user.StatusId = (int)UserStatus.Active;
+             try
+            {
+            var licenseid = await _userRepository.SignUpUser(user);
+              return new ApiResponse<int>
+                {
+                    Status = new ApiResponseStatus { Code = 200, Message = "Success" },
+                    Data = licenseid // listUsers may be an empty list if no users are found
+                };
+            }
+               catch (Exception ex)
+            {
+                return new ApiResponse<int>
+                {
+                    Status = new ApiResponseStatus { Code = 500, Message = "Internal Server Error" },
+                    Data = 0 // Return an empty list in case of error
+                };
+            }
+
         }
     }
 }

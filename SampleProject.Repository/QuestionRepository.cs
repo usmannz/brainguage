@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure;
+using Microsoft.EntityFrameworkCore;
 using SampleProject.Common;
 using SampleProject.Common.Entities;
 using SampleProject.Common.Models;
@@ -27,7 +28,7 @@ namespace SampleProject.Repository
             ViewModelQuestionListing listQuestions = new ViewModelQuestionListing();
 
             // Start with a queryable context for questions
-            var query = _context.Questions.AsQueryable();
+            var query = _context.Questions.Where(x=> !x.IsDeleted).AsQueryable();
 
             if (query.Any())
             {
@@ -49,7 +50,7 @@ namespace SampleProject.Repository
                     }
                     else if (pagination.SortDirection == (int)SortDirection.Desc)
                     {
-                        query = query.OrderBy($"{pagination.SortByField} descending"); // Sort descending
+                        query = query.OrderBy($"{pagination.SortByField} desc"); // Sort descending
                     }
                 }
 
@@ -117,19 +118,94 @@ public async Task<int> SaveQuestion(Questions question)
         }
    
      public async Task<int> DeleteQuestion(int questionId, int deletedBy)
-        {
-
-            
+        {  
             var question = _context.Questions.Where(x => x.Id == questionId).SingleOrDefault();
-
             question.IsDeleted = true;
             question.DeletedBy = deletedBy;
             question.DeleteStamp = DateTime.UtcNow;
-
             await _context.SaveChangesAsync();
             return question.Id;
         }
 
-   
+        public async Task<ViewModelUserQuestionListing> GetAllUsersQuestions(Pager pagination, int userId)
+        {
+            ViewModelUserQuestionListing listQuestions = new ViewModelUserQuestionListing();
+
+            // Start with a queryable context for questions
+            var query = _context.Questions
+                .Where(x => !x.IsDeleted)
+                .GroupJoin(_context.QuestionsAssignment.Where(qa => qa.UsersId == userId),
+                    q => q.Id,
+                    qa => qa.QuestionsId,
+                    (q, qaGroup) => new {
+                        q.Id,
+                        q.Question,
+                        q.Answer,
+                        q.CreateStamp,
+                        IsAssigned = qaGroup.Any()
+                    })
+                .AsQueryable();
+
+            if (query.Any())
+            {
+                // Apply filtering
+                if (!string.IsNullOrEmpty(pagination.FilterText))
+                {
+                    query = query.Where(q => q.Question.Contains(pagination.FilterText));
+                }
+
+                // Get the total count of filtered questions
+                listQuestions.Count = await query.CountAsync();
+
+                // Apply sorting based on the provided SortByField and SortDirection
+                if (!string.IsNullOrEmpty(pagination.SortByField))
+                {
+                    if (pagination.SortDirection == (int)SortDirection.Asc)
+                    {
+                        query = query.OrderBy(pagination.SortByField); // Sort ascending
+                    }
+                    else if (pagination.SortDirection == (int)SortDirection.Desc)
+                    {
+                        query = query.OrderBy($"{pagination.SortByField} desc"); // Sort descending
+                    }
+                }
+
+                // Apply pagination
+                var pagedQuestions = await query
+                    .Skip(pagination.SkipBy)
+                    .Take(pagination.PageSize)
+                    .ToListAsync();
+
+                // Populate the list of questions
+                listQuestions.Questions = pagedQuestions.Select(x => new ViewUserQuestionListing()
+                {
+                    Id = x.Id,
+                    Question = x.Question,
+                    Answer = x.Answer,
+                    IsAssigned = x.IsAssigned
+                }).ToList();
+            }
+
+            return listQuestions;
+        }
+
+        public async Task<int> AssignQestions(List<QuestionsAssignment> question,int userId)
+        {
+
+foreach(var q in question){
+                q.CreatedBy = userId;
+                q.CreateStamp = DateTime.UtcNow;
+
+}
+                var entityCheck = _context.QuestionsAssignment.AsNoTracking().FirstOrDefault(item => item.UsersId == question[0].UsersId && !item.IsDeleted);
+                if (entityCheck != null)
+                {
+                    _context.QuestionsAssignment.RemoveRange(entityCheck);
+                     }
+                    _context.QuestionsAssignment.AddRange(question);
+                    await _context.SaveChangesAsync();
+                    return 1;
+               
+            }
     }
 }

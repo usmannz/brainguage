@@ -11,8 +11,8 @@ namespace SampleProject.Common
 public class Encryption
     {
         private static System.Security.Cryptography.MD5CryptoServiceProvider md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-        private static byte[] key = { 7, 3, 4, 5, 6, 7, 8, 9, 10, 11, 23, 16, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
-        private static byte[] iv = { 95, 210, 210, 33, 111, 123, 123, 234 };
+        private static byte[] key = { 6, 2, 3, 4, 5, 6, 9, 8, 9, 10, 11, 15, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
+        private static byte[] iv = { 65, 110, 110, 26, 210, 178, 190, 219 };
 
         /// <summary>
         /// Convert Hexadecimal String To Byte Array

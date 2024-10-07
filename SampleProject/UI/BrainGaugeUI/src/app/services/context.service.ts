@@ -29,8 +29,8 @@ export class ContextService {
     }
 
     get CurrentUserName(): string {
-        if (this._session && this._session.fullName) {
-            return this._session.fullName;
+        if (this._session && this._session.FirstName) {
+            return this._session.FirstName;
         }
         return "";
     }

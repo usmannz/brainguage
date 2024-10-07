@@ -10,8 +10,6 @@ import { ToastNotificationService } from 'src/app/services/toastr.service';
 import { UserService } from 'src/app/services/user.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 
-declare var window: any;
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,12 +19,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
   public submitted = false;
   public isLoginInProgress: boolean = false;
   private _returnUrl: string;
-  private _currentYear;
 
   public loginForm = this._formBuilder.group({
       emailAddress: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      rememberMe: ["false"]
+      rememberMe: [false]
   });
    private _now = new Date();
   private _exp =  new Date(this._now.getFullYear()+1, this._now.getMonth(), this._now.getDate());
@@ -41,12 +38,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   ) {
       super(_contextService,_router);
-      this._currentYear = Settings.currentYear;
       if(this._cookieService.get('emailAddress'))
       {
       this.loginForm.patchValue({
           emailAddress: this._cookieService.get('emailAddress'),
-          rememberMe: this._cookieService.get('remember')
+          rememberMe:  this._cookieService.get('remember') === "true"
       });
       }
   }
@@ -60,7 +56,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   btnLogin_Clicked() {
-debugger;
       this.submitted = true;
       if (!this.loginForm.valid) {
           return false;
@@ -70,8 +65,6 @@ debugger;
           this.isLoginInProgress = true;
 
           this._userService.authenticate(user).subscribe(d => {
-            debugger;
-
               this.isLoginInProgress = false;
           if(d.success == 1)
           {
@@ -84,7 +77,7 @@ debugger;
               this._contextService._userRoles = d.role;
               if (this.loginForm.value.rememberMe) {
                   this._cookieService.put('emailAddress', this.loginForm.value.emailAddress,{  expires: this._exp});
-                  this._cookieService.put('remember', this.loginForm.value.rememberMe,{  expires: this._exp});
+                  this._cookieService.put('remember', String(this.loginForm.value.rememberMe),{  expires: this._exp});
 
               }
               else {
@@ -92,8 +85,6 @@ debugger;
                   this._cookieService.remove('remember')
               }
               this._router.navigate([this._returnUrl]);
-              // this.router.navigate(['/projects']);
-
           }
           else if (d.success == -1 )
           {
@@ -103,8 +94,6 @@ debugger;
           {
             this.toastService.showError("User is inactive.", "error");
           }
-
-              
           }, err => {
               this.isLoginInProgress = false;
               switch (err.status) {

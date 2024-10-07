@@ -43,28 +43,47 @@ namespace SampleProject.Repository
             return await Task.FromResult(user);
 
         }
-        public async Task<ApiResponse<List<Users>>> GetAllUsers()
+        public async Task<List<UserDropDown>> GetAllDropDownUsers()
         {
-            try
-            {
-                List<Users> listUsers = new List<Users>();
-                listUsers = await _context.Users.AsNoTracking().ToListAsync();
+            List<UserDropDown> listUsers = new List<UserDropDown>();
 
-                return new ApiResponse<List<Users>>
+            listUsers = await _context.Users
+                .Where(x => !x.IsDeleted)
+                .AsNoTracking()
+                .Select(x => new UserDropDown
                 {
-                    Status = new ApiResponseStatus { Code = 200, Message = "Success" },
-                    Data = listUsers // listUsers may be an empty list if no users are found
-                };
-            }
-            catch (Exception ex)
+                    Id = x.Id,
+                    FirstName = x.FirstName ?? string.Empty,  // Handle nulls
+                    LastName = x.LastName ?? string.Empty     // Handle nulls
+                })
+                .ToListAsync();
+
+            return listUsers;
+
+        }
+
+        public async Task<int> SignUpUser(Users user)
+        {
+            user.Email = user.Email.Trim();
+            var checkUser = _context.Users.Include(x => x.UserRoles).AsNoTracking().FirstOrDefault(x =>
+                        x.Email.Equals(user.Email) && !x.IsDeleted
+                        );
+            if ( checkUser != null )
             {
-                // Log the exception or handle it as needed
-                return new ApiResponse<List<Users>>
-                {
-                    Status = new ApiResponseStatus { Code = 500, Message = "Internal Server Error" },
-                    Data = new List<Users>() // Return an empty list in case of error
-                };
+                return -1;
             }
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            if (user.Id > 0)
+            {
+                UserRoles roles = new UserRoles();
+                roles.UsersId = user.Id;
+                roles.RoleId = (int)Common.Roles.User;
+                _context.UserRoles.Add(roles);
+                await _context.SaveChangesAsync();
+            }
+            return user.Id;
         }
 
 

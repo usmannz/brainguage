@@ -12,12 +12,14 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
-    { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
-    { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
-    { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
-    { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
-    { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
+    { path: '/questions', title: 'Questions',  icon:'ni-planet text-blue', class: '' },
+    { path: '/questions-assignment', title: 'Questions Assignment',  icon:'ni-planet text-blue', class: '' },
+    { path: '/quiz', title: 'Quiz',  icon:'ni-planet text-blue', class: '' },
+    // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
+    // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
+    // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
+    // { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
+    // { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
 ];
 
 @Component({
@@ -52,10 +54,39 @@ export class SidebarComponent extends BaseComponent implements OnInit {
 
   checkUserRole(sideMenu: SideMenu) {
     switch (sideMenu) {
-      case SideMenu.Dashboard:
-      case SideMenu.Questions:  
-      {
-        var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.Admin);
+      // case SideMenu.Dashboard:
+        case SideMenu.QuestionsAssignment: 
+        {
+          var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.Admin);
+          if (roleCheck) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        } 
+        case SideMenu.Questions:  
+        {
+          var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.Admin || item.roleId == Roles.User);
+          if (roleCheck) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        } 
+        case SideMenu.Quiz:  
+        {
+          var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.User);
+          if (roleCheck) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        } 
+      case SideMenu.User: {
+        var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.User);
         if (roleCheck) {
           return true;
         }

@@ -45,3 +45,18 @@ export class TenantUser {
     lastName: string;
     fullName: string;
 }
+
+
+
+export class SignUp {
+    public constructor(init?: Partial<SignUp>) {
+        Object.assign(this, init);
+    }
+
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    statusId: number;                                                     
+}

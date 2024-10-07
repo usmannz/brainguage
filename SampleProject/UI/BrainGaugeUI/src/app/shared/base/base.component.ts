@@ -68,7 +68,7 @@ export class BaseComponent {
 
         if(roleCheck.length ==0)
         {
-        this._router.navigate(['/dashboard'])
+        this._router.navigate(['/questions'])
         }
         //// check token expiry
         var currentTime = new Date().getTime() / 1000;
@@ -137,7 +137,16 @@ export class BaseComponent {
         }
       }
 
-      
+      isAdminRole()
+      {
+        var roleCheck = this.contextService._userRoles.find(item => item.roleId == Roles.Admin);
+        if (roleCheck) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
       hideEmailBanner(event:any)
       {
         this.isEmail = true;

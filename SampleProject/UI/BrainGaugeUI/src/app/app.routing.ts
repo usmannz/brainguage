@@ -2,19 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './services/authguard';
 import { LoginComponent } from './pages/login/login.component';
-import { QuestionsComponent } from './pages/questions/questions.component';
+import { AdminQuestionsListingComponent } from './pages/questions/admin-question-listing/admin-question-listing.component';
+import { QuestionAssignmentComponent } from './pages/questions/question-assignement/question-assignment.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { QuizComponent } from './pages/quiz/questions/admin-question-listing/quiz.component';
 
 const routes: Routes =[
-  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent,canActivate: [AuthGuard]  },
-  { path: 'questions', pathMatch: 'full', component: QuestionsComponent,canActivate: [AuthGuard]  },
+  // { path: 'dashboard', pathMatch: 'full', component: DashboardComponent,canActivate: [AuthGuard]  },
+  { path: 'questions', pathMatch: 'full', component: AdminQuestionsListingComponent,canActivate: [AuthGuard]  },
+  { path: 'questions-assignment', pathMatch: 'full', component: QuestionAssignmentComponent,canActivate: [AuthGuard]  },
+  { path: 'quiz', pathMatch: 'full', component: QuizComponent,canActivate: [AuthGuard]  },
   { path: 'login', component: LoginComponent },
-  { path: '**', component: DashboardComponent,canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent },
+  { path: '**', component: AdminQuestionsListingComponent,canActivate: [AuthGuard] },
 
 ];
 

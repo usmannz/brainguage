@@ -5,8 +5,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,9 +14,6 @@ import { AuthGuard } from './services/authguard';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { TablesComponent } from './pages/tables/tables.component';
-import { IconsComponent } from './pages/icons/icons.component';
-import { MapsComponent } from './pages/maps/maps.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CookieModule, CookieService } from 'ngx-cookie';
 import { UserService } from './services/user.service';
@@ -28,7 +23,6 @@ import { PasswordToggleDirective } from './directives/password-toggle.directive'
 import { TruncateTextDirective } from './directives/truncate-text.directive';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
-import { QuestionsComponent } from './pages/questions/questions.component';
 import { PaginationComponent } from './pages/pagination/pagination.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
@@ -37,8 +31,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select'; // if you're using selects
 import {MatDialogModule} from '@angular/material/dialog';
-import { QuestionEditComponent } from './pages/question-edit/question-edit.component';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
+import { AdminQuestionsListingComponent } from './pages/questions/admin-question-listing/admin-question-listing.component';
+import { AdminQuestionEditComponent } from './pages/questions/admin-question-edit/admin-question-edit.component';
+import { QuestionAssignmentComponent } from './pages/questions/question-assignement/question-assignment.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { RegisterComponent } from './pages/register/register.component';
+import { QuizComponent } from './pages/quiz/questions/admin-question-listing/quiz.component';
 
 
 @NgModule({
@@ -63,25 +62,26 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule, // if necessary
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatInputModule
 
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-    AuthLayoutComponent,
     DashboardComponent,
-    QuestionsComponent,
+    AdminQuestionsListingComponent,
+    QuestionAssignmentComponent,
+    QuizComponent,
     UserProfileComponent,
-    TablesComponent,
-    IconsComponent,
-    MapsComponent,
     LoginComponent,
+    RegisterComponent,
     PasswordToggleDirective,
     TruncateTextDirective,
     PaginationComponent,
-    QuestionEditComponent,
-    ConfirmationDialogComponent
+    AdminQuestionEditComponent,
+    ConfirmationDialogComponent,
+    
 
 
   ],
@@ -95,7 +95,7 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
 
   ],
   entryComponents: [
-    QuestionEditComponent,
+    AdminQuestionEditComponent,
 
 ],
   bootstrap: [AppComponent]

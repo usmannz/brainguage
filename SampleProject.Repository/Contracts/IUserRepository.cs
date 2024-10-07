@@ -12,6 +12,7 @@ namespace SampleProject.Repository.Contracts
     public interface IUserRepository : IRepository<Users>
     {
     Task<Users> Authenticate(string email, string password);
-    Task<ApiResponse<List<Users>>> GetAllUsers();
+    Task<List<UserDropDown>> GetAllDropDownUsers();
+    Task<int> SignUpUser(Users user);
     }
 }

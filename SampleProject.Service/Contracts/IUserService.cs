@@ -11,6 +11,7 @@ namespace SampleProject.Service.Contracts
     public interface IUserService
     {
     Task<Users> Authenticate(string email, string password);
-    Task<ApiResponse<List<Users>>> GetAllUsers();
+    Task<ApiResponse<List<UserDropDown>>> GetAllDropDownUsers();
+    Task<ApiResponse<int>> SignUpUser(SignUp signUp);   
     }
 }

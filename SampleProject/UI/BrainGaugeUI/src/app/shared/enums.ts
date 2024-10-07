@@ -2,7 +2,10 @@ export enum SideMenu {
     Dashboard = 1,
     Admin = 12,
     User = 13,
-    Questions = 2
+    Questions = 2,
+    QuestionsAssignment = 3,
+    Quiz = 4,
+
 }
 
 export enum Roles {
@@ -18,7 +21,9 @@ export enum PageAccessType {
 export enum Pages {
     None = 0,
     Dashboard = 1,
-    Questions = 2
+    Questions = 2,
+    QuestionsAssignment = 3,
+    Quiz = 4,
 }
 
 export enum SortFields {

@@ -3,8 +3,8 @@
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-6">
-          <h1 class="text-white">Welcome!</h1>
-          <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p>
+          <!-- <h1 class="text-white">Welcome!</h1>
+          <p class="text-lead text-light">To BRAIN GUAGE.</p> -->
         </div>
       </div>
     </div>
@@ -21,49 +21,110 @@
   <div class="row justify-content-center">
     <div class="col-lg-6 col-md-8">
       <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-transparent pb-5">
-          <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-          <div class="text-center">
-            <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
+        <!-- <div class="card-header bg-transparent pb-5"> -->
+          <!-- <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div> -->
+          <!-- <div class="text-center loginbox-logo">
+            <img class="mb-5 mt-4 " src="assets/img/brand/red.png" class="img-fluid"
+                style="max-width: 200px; margin: 10px auto 30px; display: table;" alt="">
+        </div> -->
+          <!-- <div class="text-center">
+            <img  alt="Image placeholder" src="assets/img/brand/red.png" style="height: auto;width: 150px;"> -->
+        
+            <!-- <a href="javascript:void(0)" class="btn btn-neutral btn-icon mr-4">
               <span class="btn-inner--icon"><img src="assets/img/icons/common/github.svg"></span>
               <span class="btn-inner--text">Github</span>
             </a>
             <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon"><img src="assets/img/icons/common/google.svg"></span>
               <span class="btn-inner--text">Google</span>
-            </a>
-          </div>
-        </div>
+            </a> -->
+          <!-- </div> -->
+        <!-- </div> -->
         <div class="card-body px-lg-5 py-lg-5">
-          <div class="text-center text-muted mb-4">
+          <div class="text-center loginbox-logo">
+            <img class="mb-5 mt-4 " src="assets/img/brand/red.png" class="img-fluid"
+                style="max-width: 200px; margin: 10px auto 30px; display: table;" alt="">
+        </div>
+
+          <!-- <div class="text-center text-muted mb-4">
             <small>Or sign up with credentials</small>
+          </div> -->
+          <form [formGroup]="signUpForm">
+            <div class="form-group">
+                <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                  placeholder="Enter your first name" [ngClass]="{ error: submitted && mysignUpForm.firstName.errors }"
+                  (keyup.enter)="
+                                      !this.isSignUpInProgress ? signUpValidation() : false
+                                    " />
+                <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.firstName.errors?.required">
+                  First name is required
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.firstName.errors?.maxlength">
+                  Maximum of 450 characters are allowed
+              </div>
+              </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                placeholder="Enter your last name" [ngClass]="{ error: submitted && mysignUpForm.lastName.errors }"
+                (keyup.enter)="!this.isSignUpInProgress ? signUpValidation() : false" />
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.lastName.errors?.required">
+                Last name is required
+              </div>
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.lastName.errors?.maxlength">
+                Maximum of 450 characters are allowed
+            </div>            
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="email" formControlName="email"
+                placeholder="Enter email" [ngClass]="{ error: submitted && mysignUpForm.email.errors }"
+                (keyup.enter)="
+                                    !this.isSignUpInProgress ? signUpValidation() : false
+                                  " />
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.email.errors?.required">
+                Email is required
+              </div>
+              <div class="invalid-feedback" *ngIf=" submitted && mysignUpForm.email.errors?.email">
+                Please enter a valid email address
+              </div>
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.email.errors?.pattern">
+                Please provide your organization email.
+              </div>
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.email.errors?.maxlength">
+                Maximum of 200 characters are allowed
+            </div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password"
+                formControlName="password" placeholder="Enter new password"
+                [ngClass]="{ error: submitted && mysignUpForm.password.errors }" (keyup.enter)="
+                            !this.isSignUpInProgress ? signUpValidation() : false"/>
+              <!-- error block -->
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.password.errors?.required">
+                New password is required
+              </div>
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.password.errors?.maxlength">
+                Maximum of 200 characters are allowed
+            </div>
+            <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.password.errors?.pattern">
+              Password must be at least 8 characters
+              Password must contain at least one numbers, lowercase letters, uppercase letters and special character.
+            </div>        
+            </div>
+            <div class="form-group">
+                <input  type="password" class="form-control" id="confirm"
+                  formControlName="confirm" placeholder="Confirm new password"
+                  [ngClass]="{ error: submitted && mysignUpForm.confirm.errors }" (keyup.enter)="
+                                      !this.isSignUpInProgress ? signUpValidation() : false" />
+                <!-- error block -->
+                <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.confirm.errors?.required">
+                  Confirm password is required
+                </div>
+                <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.confirm.errors?.mustMatch">
+                  The confirmation does not match.
+                </div>
           </div>
-          <form role="form">
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                </div>
-                <input class="form-control" placeholder="Name" type="text">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                </div>
-                <input class="form-control" placeholder="Email" type="email">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                </div>
-                <input class="form-control" placeholder="Password" type="password">
-              </div>
-            </div>
-            <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
+
+            <!-- <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
             <div class="row my-4">
               <div class="col-12">
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -73,10 +134,15 @@
                   </label>
                 </div>
               </div>
-            </div>
-            <div class="text-center">
-              <button type="button" class="btn btn-primary mt-4">Create account</button>
-            </div>
+            </div> -->
+            <div  class="row">
+              <div class="text-left col-6">
+                <button  routerLink="/login"  type="button" class="btn btn-primary login-btn-size">Login</button>
+              </div>
+              <div class="text-right col-6">
+                <button  (click)="signUpValidation()" [disabled]="isSignUpInProgress" type="button" class="btn btn-primary login-btn-size">Register<i class="fa fa-spinner fa-spin" *ngIf="isSignUpInProgress"></i></button>
+              </div>
+          </div>
           </form>
         </div>
       </div>
