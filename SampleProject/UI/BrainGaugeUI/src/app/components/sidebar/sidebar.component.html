@@ -52,6 +52,12 @@
         <span class="d-none d-md-block d-lg-block">Quiz</span>
     </a>
 </li>
+<li class="nav-item" *ngIf="checkUserRole(sideMenu.Categories)">
+  <a routerLink="/categories"  class="nav-link" [ngClass]="CurrentPage == 5 ? 'active': ''">
+      <i class="ni ni-tv-2 text-primary"></i>
+      <span class="d-none d-md-block d-lg-block">Categories</span>
+  </a>
+</li>
       </ul>
       <!-- <hr class="my-3">
       <h6 class="navbar-heading text-muted">Documentation</h6>

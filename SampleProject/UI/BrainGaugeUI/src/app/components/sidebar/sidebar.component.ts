@@ -15,6 +15,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/questions', title: 'Questions',  icon:'ni-planet text-blue', class: '' },
     { path: '/questions-assignment', title: 'Questions Assignment',  icon:'ni-planet text-blue', class: '' },
     { path: '/quiz', title: 'Quiz',  icon:'ni-planet text-blue', class: '' },
+    { path: '/categories', title: 'Categories',  icon:'ni-planet text-blue', class: '' },
     // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
     // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
     // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
@@ -55,6 +56,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
   checkUserRole(sideMenu: SideMenu) {
     switch (sideMenu) {
       // case SideMenu.Dashboard:
+      case SideMenu.Categories:
         case SideMenu.QuestionsAssignment: 
         {
           var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.Admin);

@@ -1,0 +1,37 @@
+
+<h1 *ngIf="!isEdit"  class="card-header text-white bg-default">Add Category</h1>
+<h1 *ngIf="isEdit" class="card-header text-white bg-default">Edit Category</h1>      
+
+<div class="custom-form">
+  <div class="modal-body modal-center-scroll">
+    <form [formGroup]="categoryForm">
+    <div class="form-group">
+      <label for="name"
+        [ngClass]="{'error': submitted && mycategoryForm.name.errors}">Name<sup>*</sup></label>
+      <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
+        id="name" formControlName="name" #name placeholder="Enter name"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="5000"></textarea>
+        <label class="nopadding characters-remaining-textarea clrlbl">
+          {{name.value.length}} / 5000 characters left.
+        </label>
+      <div class="invalid-feedback" *ngIf="submitted && mycategoryForm.name.errors?.required">
+        Name is required
+      </div>
+    </div>
+    </form>
+  </div>
+  <div class="modal-footer border-0">
+    <!-- <button mat-button value="Cancel" class="btn btn-primary login-btn-size" [mat-dialog-close]="false"
+      cdkFocusInitial>
+      Cancel
+    </button> -->
+    <button (click)="closeDialog()" [disabled]="isCategoryInProgress" type="button" class="btn btn-primary login-btn-size">Cancel</button>
+
+    <!-- <button  mat-button value="Confirm" class="btn btn-md btn-primary login-btn-size" [mat-dialog-close]="true" cdkFocusInitial>
+      Ok
+    </button> -->
+    <button (click)="saveCategory()" [disabled]="isCategoryInProgress" type="submit" class="btn btn-primary login-btn-size">Save<i class="fa fa-spinner fa-spin" *ngIf="isCategoryInProgress"></i></button>
+
+  </div>
+</div>

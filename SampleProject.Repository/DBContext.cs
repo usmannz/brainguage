@@ -16,6 +16,7 @@ namespace SampleProject.Repository
         public virtual DbSet<Questions> Questions { get; set; }
         public virtual DbSet<QuestionsAssignment> QuestionsAssignment { get; set; }
         public virtual DbSet<UserQuiz> UserQuiz { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
 
 
         public DBContext()

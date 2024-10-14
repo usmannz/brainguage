@@ -128,7 +128,7 @@ export class QuizComponent extends BaseComponent  implements OnInit {
   }
 
   isAnswered(question: any) {
-    return question.answer.length > 0 ? "Answered" : "Not Answered";
+    return  question.answer != null && question.answer.length > 0 ? "Answered" : "Not Answered";
   }
 
   isCorrect(question: Question) {
@@ -144,14 +144,12 @@ export class QuizComponent extends BaseComponent  implements OnInit {
       if(data == -1)
       {
         this.toastService.showError("Question should be unique.", "Question");
-  
       }
       else
       {
         this.toastService.showSuccess("Quiz has been submitted successfully.", "Question");
-  
       }
-        
+      this.router.navigate(['questions']);
       this.isFilterInProgress = false;
       
     })

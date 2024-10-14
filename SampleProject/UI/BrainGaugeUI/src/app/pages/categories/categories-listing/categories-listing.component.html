@@ -1,0 +1,81 @@
+<!-- Sidenav -->
+<app-sidebar  CurrentPage="2"></app-sidebar>
+<div class="main-content">
+  <!-- Top navbar -->
+  <app-navbar></app-navbar>
+  <!-- Pages -->
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+     
+      </div>
+    </div>
+  </div>
+  <!-- Dark table -->
+  <div class="container-fluid mt--7">
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+      
+        <div class="row align-items-center">
+          <div class="col-8">
+            <div class="card-header bg-transparent border-0">
+            <h3 class="text-white mb-0">Categories</h3>
+          </div>
+          </div>
+          <div class="col-4 text-right">
+            <div class="card-header bg-transparent border-0">
+            <a (click)="btnAddItem_Clicked()"  class="btn btn-sm btn-primary">Add New Category</a>
+          </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" class="table-width-10">S#</th>
+                <th scope="col" class="table-width-40">Name</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let category of listCategories.categories; let i = index">
+   
+                <td>
+                  {{i + 1}}
+                </td>
+                <td>
+                  {{category.name}}
+                </td>            
+                <td class="text-right">
+                  <button (click)="btnEditItem_Clicked(category)" type="button" class="btn btn-sm btn-primary">Edit</button>
+                  <button (click)="btnDeleteItem_Clicked(category)" type="button" class="btn btn-sm btn-primary ">Delete</button>
+
+                  <!-- <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                      <a   (click)="btnEditItem_Clicked(category)"class="dropdown-item">Edit</a>
+                      <a  (click)="btnDeleteItem_Clicked(category)"class="dropdown-item">Delete</a>
+                    </div>
+                  </div> -->
+                </td>
+              </tr>          
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <app-pagination (pager)="onPageChange($event)" [_count]='count'></app-pagination>
+    </div>
+  </div>  
+</div>  
+  <!-- <div class="container-fluid">
+    <app-footer></app-footer>
+  </div> -->
+</div>
+
+
+

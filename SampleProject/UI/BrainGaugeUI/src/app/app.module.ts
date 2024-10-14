@@ -38,6 +38,8 @@ import { QuestionAssignmentComponent } from './pages/questions/question-assignem
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { RegisterComponent } from './pages/register/register.component';
 import { QuizComponent } from './pages/quiz/questions/admin-question-listing/quiz.component';
+import { CategoriesListingComponent } from './pages/categories/categories-listing/categories-listing.component';
+import { CategoryEditComponent } from './pages/categories/categories-edit/category-edit.component';
 
 
 @NgModule({
@@ -81,7 +83,8 @@ import { QuizComponent } from './pages/quiz/questions/admin-question-listing/qui
     PaginationComponent,
     AdminQuestionEditComponent,
     ConfirmationDialogComponent,
-    
+    CategoriesListingComponent,
+    CategoryEditComponent,
 
 
   ],
@@ -96,7 +99,7 @@ import { QuizComponent } from './pages/quiz/questions/admin-question-listing/qui
   ],
   entryComponents: [
     AdminQuestionEditComponent,
-
+    CategoryEditComponent
 ],
   bootstrap: [AppComponent]
 })

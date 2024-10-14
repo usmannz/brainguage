@@ -5,6 +5,7 @@ export enum SideMenu {
     Questions = 2,
     QuestionsAssignment = 3,
     Quiz = 4,
+    Categories = 5,
 
 }
 
@@ -24,6 +25,7 @@ export enum Pages {
     Questions = 2,
     QuestionsAssignment = 3,
     Quiz = 4,
+    Categories = 5,
 }
 
 export enum SortFields {
