@@ -51,8 +51,12 @@ namespace SampleProject.Service
                 public async Task<ApiResponse<int>> SaveQuestion(Questions question, int userId)
         {
             question.Question = question.Question.Trim();
-            question.Answer =question.Answer.Trim();
-
+            question.Description =question.Description.Trim();
+            question.Option1 =question.Option1.Trim();
+            question.Option2 =question.Option2.Trim();
+            question.Option3 =question.Option3.Trim();
+            question.Option4 =question.Option4.Trim();
+            question.Option5 =question.Option5.Trim();
             if (question.Id > 0)
             {
                 question.UpdatedBy = userId;

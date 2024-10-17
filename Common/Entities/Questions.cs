@@ -13,7 +13,19 @@ public class Questions : IEntity
     {
         public int Id { get; set; }
         public string Question { get; set; } =  string.Empty;
-        public string Answer { get; set; }  =  string.Empty;
+        public string Description { get; set; }  =  string.Empty;
+        public string Option1 { get; set; }  =  string.Empty;
+        public string Option2 { get; set; }  =  string.Empty;
+        public string Option3 { get; set; }  =  string.Empty;
+        public string Option4 { get; set; }  =  string.Empty;
+        public string Option5 { get; set; }  =  string.Empty;
+        public bool isMockExam { get; set; }
+        public bool IsDemo { get; set; }
+        public int CategoriesId { get; set; }
+        public string PictureUrl { get; set; }
+        [NotMapped]
+        public string PictureBase64 { get; set; }
+        public string PictureWebPath => string.IsNullOrEmpty(PictureUrl) ? "" : $"{AppSettings.WebPathData}/{PictureUrl}";
         public bool IsDeleted { get; set; }
         public DateTime CreateStamp { get; set; }
         public DateTime? UpdateStamp { get; set; }
@@ -43,7 +55,6 @@ public class Questions : IEntity
     {
         public int Id { get; set; }
         public string Question { get; set; } = string.Empty;
-        public string Answer { get; set; } = string.Empty;
         public bool IsAssigned { get; set; } = false;
 
     }

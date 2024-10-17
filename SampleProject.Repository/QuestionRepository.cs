@@ -65,7 +65,6 @@ namespace SampleProject.Repository
                 {
                     Id = x.Id,
                     Question = x.Question,
-                    Answer = x.Answer,
                 }).ToList();
             }
 
@@ -73,6 +72,18 @@ namespace SampleProject.Repository
         }
 public async Task<int> SaveQuestion(Questions question)
         {
+             if (!string.IsNullOrEmpty(question.PictureBase64))
+            {
+                var guid =  Guid.NewGuid().ToString();
+                string relativeFilePath = Path.Combine(AppSettings.GetUserFolderPath(guid), $"{guid}.png");
+
+                byte[] bytes = Convert.FromBase64String(question.PictureBase64.Replace("data:image/png;base64,", ""));
+                // byte[] resizedBytes = Helper.ResizeImage(bytes, AppSettings.UserImageWidth, AppSettings.UserImageHeight);
+                Storage.Provider.Save(Path.Combine(AppSettings.PathAppData, relativeFilePath), bytes);
+
+                // need to change this to just picture name
+                question.PictureUrl = $"{guid}.png";
+            }
 
             if (question.Id == 0)
             {
@@ -101,8 +112,17 @@ public async Task<int> SaveQuestion(Questions question)
                 else
                 {
                     var questionEntity = _context.Questions.SingleOrDefault(item => item.Id == question.Id && !item.IsDeleted);
-                    questionEntity.Question = question.Question;
-                    questionEntity.Answer = question.Answer;
+            questionEntity.Question = question.Question;
+            questionEntity.Description =question.Description;
+            questionEntity.Option1 =question.Option1;
+            questionEntity.Option2 =question.Option2;
+            questionEntity.Option3 =question.Option3;
+            questionEntity.Option4 =question.Option4;
+            questionEntity.Option5 =question.Option5;
+                        questionEntity.isMockExam =question.isMockExam;
+            questionEntity.IsDemo =question.IsDemo;
+            questionEntity.CategoriesId =question.CategoriesId;
+
                     questionEntity.UpdateStamp = question.UpdateStamp;
                     questionEntity.UpdatedBy = question.UpdatedBy;
                     _context.Questions.Update(questionEntity);
@@ -140,7 +160,6 @@ public async Task<int> SaveQuestion(Questions question)
                     (q, qaGroup) => new {
                         q.Id,
                         q.Question,
-                        q.Answer,
                         q.CreateStamp,
                         IsAssigned = qaGroup.Any()
                     })
@@ -181,7 +200,6 @@ public async Task<int> SaveQuestion(Questions question)
                 {
                     Id = x.Id,
                     Question = x.Question,
-                    Answer = x.Answer,
                     IsAssigned = x.IsAssigned
                 }).ToList();
             }

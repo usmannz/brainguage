@@ -139,7 +139,7 @@ namespace SampleProject.Common
         public static int UserImageWidth => Convert.ToInt32(Configuration["AppSettings:user-img-width"]);
         public static int UserImageHeight => Convert.ToInt32(Configuration["AppSettings:user-img-height"]);
 
-        public static string GetUserFolderPath(string guid) => System.IO.Path.Combine($"user", $"{guid}");
+        public static string GetUserFolderPath(string guid) => System.IO.Path.Combine($"questions", $"{guid}");
         public static string WebPathData => Configuration["AppSettings:web-path-data"];
 
         public static string SiteUrl => Configuration["AppSettings:siteUrl"];
