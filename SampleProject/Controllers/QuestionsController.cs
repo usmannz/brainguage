@@ -28,10 +28,25 @@ namespace SampleProject.Controllers
         }
 
           [Authorize(Roles = "Admin"),HttpPost("SaveQuestion")]        
-        public async Task<IActionResult> SaveQuestion([FromBody] Questions question)
+        public async Task<IActionResult> SaveQuestion([FromForm] QuestionDto questionDto)
+
         {
-            
-            return Ok(await _questionService.SaveQuestion(question,UserId));
+            var question = new Questions
+            {
+                Id = questionDto.Id,
+                Question = questionDto.Question, // Assuming Question property is the same in both
+                Description = questionDto.Description,
+                Option1 = questionDto.Option1,
+                Option2 = questionDto.Option2,
+                Option3 = questionDto.Option3,
+                Option4 = questionDto.Option4,
+                Option5 = questionDto.Option5,
+                isMockExam = questionDto.IsMockExam,
+                IsDemo = questionDto.IsDemo,
+                CategoriesId = questionDto.CategoriesId,
+                CorrectAnswer = questionDto.CorrectAnswer,
+            };
+            return Ok(await _questionService.SaveQuestion(question, questionDto.File, UserId));
         }
         [Authorize(Roles = "Admin"), HttpDelete("{questionId}")]
         public async Task<IActionResult> DeleteQuestion(int questionId)

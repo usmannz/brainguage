@@ -13,5 +13,7 @@ namespace SampleProject.Service.Contracts
     Task<ApiResponse<ViewModelCategoriesListing>> GetAllCategories(Pager pagination);
     Task<ApiResponse<int>> SaveCategory(Categories category, int userId);
     Task<ApiResponse<int>> DeleteCategory(int categoryId, int deletedBy);
+        Task<ApiResponse<List<Categories>>> GetAllDropDownCategories();
+
     }
 }

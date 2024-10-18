@@ -43,17 +43,17 @@ export class AdminQuestionsListingComponent extends BaseComponent  implements On
     super(_ctxService, _router);
     this._pageAccessType = PageAccessType.PRIVATE;
     this._pageAccessLevel.push(Roles.Admin);
+    this.isAdmin = this.isAdminRole();
     this.onClickSortBy(this.sortBy);
     this.getPageData();
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.isAdmin = this.isAdminRole();
   }
 
   getPageData() {
-    console.log("ca")
+    console.log(this.isAdmin,"ASD")
     if(this.isAdmin)
     {
       this._questionService.getAllQuestions(this.pagination).subscribe((d: any) => {

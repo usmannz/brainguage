@@ -166,7 +166,7 @@ export class CategoriesListingComponent extends BaseComponent  implements OnInit
     confirmDialog.afterClosed().subscribe(result => {
       if (result === true) {
         this._categoryService.deleteCategory(category.id).subscribe((d: any) => {
-          if(d?.data > 0 && d.status.code ==200)
+          if(d?.data > 0 && d.status.code ==200 )
           {
           this.toastService.showSuccess("Category is deleted successfully.", "Category");
           const indexs = this.listCategories.categories.findIndex(d => d === category);
@@ -180,6 +180,10 @@ export class CategoriesListingComponent extends BaseComponent  implements OnInit
           }
           else if(this.listCategories.categories.length  <=  this.pagination.pageSize && this.listCategories.count > this.listCategories.categories.length ) {
             this.getPageData();
+          }
+          else if (d.status.code ==200 && d?.data == -1)
+          {
+            this.toastService.showWarning("Can't delete category is associated with a question.", "Category");
           }
         }
         else

@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using SampleProject.Common;
 using SampleProject.Common.Entities;
@@ -65,24 +66,43 @@ namespace SampleProject.Repository
                 {
                     Id = x.Id,
                     Question = x.Question,
+                    Description = x.Description,
+                    Option1 = x.Option1,
+                    Option2 = x.Option2,
+                    Option3 = x.Option3,
+                    Option4 = x.Option4,
+                    Option5 = x.Option5,
+                    isMockExam = x.isMockExam,
+                    IsDemo = x.IsDemo,
+                    CorrectAnswer = x.CorrectAnswer,
+                    CategoriesId = x.CategoriesId,
+                    PictureUrl = x.PictureUrl,
                 }).ToList();
             }
 
             return listQuestions;
         }
-public async Task<int> SaveQuestion(Questions question)
+public async Task<int> SaveQuestion(Questions question, IFormFile File)
         {
-             if (!string.IsNullOrEmpty(question.PictureBase64))
+            if (File != null && File.Length > 0)
             {
-                var guid =  Guid.NewGuid().ToString();
-                string relativeFilePath = Path.Combine(AppSettings.GetUserFolderPath(guid), $"{guid}.png");
+                var guid = Guid.NewGuid().ToString();
+                string relativeFilePath = Path.Combine(AppSettings.GetUserFolderPath(guid));
 
-                byte[] bytes = Convert.FromBase64String(question.PictureBase64.Replace("data:image/png;base64,", ""));
-                // byte[] resizedBytes = Helper.ResizeImage(bytes, AppSettings.UserImageWidth, AppSettings.UserImageHeight);
-                Storage.Provider.Save(Path.Combine(AppSettings.PathAppData, relativeFilePath), bytes);
+                var uploadsDirectory = Path.Combine(AppSettings.PathAppData, relativeFilePath);
+                if (!Directory.Exists(uploadsDirectory))
+                {
+                    Directory.CreateDirectory(uploadsDirectory);
+                }
+                var filePath = Path.Combine(uploadsDirectory, $"{guid}.png");
 
-                // need to change this to just picture name
-                question.PictureUrl = $"{guid}.png";
+                //var filePath = Path.Combine(relativeFilePath, File.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await File.CopyToAsync(stream);
+                }
+
+                question.PictureUrl =Path.Combine(relativeFilePath, $"{guid}.png") ; // Optionally save the file name or path
             }
 
             if (question.Id == 0)
@@ -122,6 +142,12 @@ public async Task<int> SaveQuestion(Questions question)
                         questionEntity.isMockExam =question.isMockExam;
             questionEntity.IsDemo =question.IsDemo;
             questionEntity.CategoriesId =question.CategoriesId;
+            questionEntity.CorrectAnswer = question.CorrectAnswer;
+                    if(!string.IsNullOrEmpty(question.PictureUrl))
+                    {
+                        questionEntity.PictureUrl = question.PictureUrl;
+
+                    }
 
                     questionEntity.UpdateStamp = question.UpdateStamp;
                     questionEntity.UpdatedBy = question.UpdatedBy;

@@ -1,4 +1,5 @@
-﻿using SampleProject.Common.Contracts;
+﻿using Microsoft.AspNetCore.Http;
+using SampleProject.Common.Contracts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +13,7 @@ namespace SampleProject.Common.Entities
 public class Questions : IEntity
     {
         public int Id { get; set; }
+        public int CorrectAnswer { get; set; } = 0;
         public string Question { get; set; } =  string.Empty;
         public string Description { get; set; }  =  string.Empty;
         public string Option1 { get; set; }  =  string.Empty;
@@ -22,9 +24,9 @@ public class Questions : IEntity
         public bool isMockExam { get; set; }
         public bool IsDemo { get; set; }
         public int CategoriesId { get; set; }
-        public string PictureUrl { get; set; }
+        public string? PictureUrl { get; set; } = string.Empty;
         [NotMapped]
-        public string PictureBase64 { get; set; }
+        public string PictureBase64 { get; set; } = string.Empty;
         public string PictureWebPath => string.IsNullOrEmpty(PictureUrl) ? "" : $"{AppSettings.WebPathData}/{PictureUrl}";
         public bool IsDeleted { get; set; }
         public DateTime CreateStamp { get; set; }
@@ -41,7 +43,18 @@ public class Questions : IEntity
     {
         public int Id { get; set; }
         public string Question { get; set; } =  string.Empty;
-        public string Answer { get; set; }  =  string.Empty;
+        public string Description { get; set; }  =  string.Empty;
+        public string Option1 { get; set; }  =  string.Empty;
+        public string Option2 { get; set; }  =  string.Empty;
+        public string Option3 { get; set; }  =  string.Empty;
+        public string Option4 { get; set; }  =  string.Empty;
+        public string Option5 { get; set; }  =  string.Empty;
+        public int CorrectAnswer { get; set; } = 0;
+        public bool isMockExam { get; set; }
+        public bool IsDemo { get; set; }
+        public int CategoriesId { get; set; }
+        public string? PictureUrl { get; set; } = string.Empty;
+        public string PictureWebPath => string.IsNullOrEmpty(PictureUrl) ? "" : $"{AppSettings.WebPathData}/{PictureUrl}";
     }
 
 
@@ -65,4 +78,22 @@ public class Questions : IEntity
         public List<ViewUserQuestionListing> Questions = new List<ViewUserQuestionListing>();
         public int Count { get; set; }
     }
+
+    public class QuestionDto
+    {
+        public int Id { get; set; }
+        public string Question { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string Option1 { get; set; } = string.Empty;
+        public string Option2 { get; set; } = string.Empty;
+        public string Option3 { get; set; } = string.Empty;
+        public string Option4 { get; set; } = string.Empty;
+        public string Option5 { get; set; } = string.Empty;
+        public int CorrectAnswer { get; set; } = 0;
+        public bool IsMockExam { get; set; }
+        public bool IsDemo { get; set; }
+        public int CategoriesId { get; set; }
+        public IFormFile File { get; set; }  // Ensure this is present
+    }
+
 }

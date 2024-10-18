@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using SampleProject.Common;
 using SampleProject.Common.Contracts;
@@ -48,7 +49,7 @@ namespace SampleProject.Service
             }
         }
 
-                public async Task<ApiResponse<int>> SaveQuestion(Questions question, int userId)
+                public async Task<ApiResponse<int>> SaveQuestion(Questions question, IFormFile File, int userId)
         {
             question.Question = question.Question.Trim();
             question.Description =question.Description.Trim();
@@ -70,7 +71,7 @@ namespace SampleProject.Service
             }
              try
             {
-            var licenseid = await _questionRepository.SaveQuestion(question);
+            var licenseid = await _questionRepository.SaveQuestion(question, File);
               return new ApiResponse<int>
                 {
                     Status = new ApiResponseStatus { Code = 200, Message = "Success" },

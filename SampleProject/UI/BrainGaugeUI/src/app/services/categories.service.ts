@@ -26,4 +26,9 @@ export class CategoriesService {
         return this._http.delete<number>(`${Settings.apiBase}categories/${categoryId}`)     
     }
 
+    getAllDropDownCategories(): Observable<any> {
+        return this._http.get<any>(`${Settings.apiBase}categories/getAllDropDownCategories`);
+    }
+
+
 }

@@ -102,5 +102,30 @@ namespace SampleProject.Service
                 };
             }
         }
+
+        public async Task<ApiResponse<List<Categories>>> GetAllDropDownCategories()
+        {
+                try
+                {
+                var listCategories = await _categoryRepository.GetAllDropDownCategories();
+                return new ApiResponse<List<Categories>>
+                {
+                    Status = new ApiResponseStatus { Code = 200, Message = "Success" },
+                    Data = listCategories
+                };
+                }
+                catch (Exception ex)
+            {
+                return new ApiResponse<List<Categories>>
+                {
+                    Status = new ApiResponseStatus { Code = 500, Message = "Internal Server Error" },
+                    Data = new List<Categories>() // Return an empty list in case of error
+                };
+            }
+
+            
+            //var listUsers = await _userRepository.GetAllUsers();
+            //return await Task.FromResult<ApiResponse<List<Users>>>(listUsers);
+        }
     }
 }

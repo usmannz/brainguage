@@ -16,6 +16,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/questions-assignment', title: 'Questions Assignment',  icon:'ni-planet text-blue', class: '' },
     { path: '/quiz', title: 'Quiz',  icon:'ni-planet text-blue', class: '' },
     { path: '/categories', title: 'Categories',  icon:'ni-planet text-blue', class: '' },
+    { path: '/mock-test', title: 'Mock Test',  icon:'ni-planet text-blue', class: '' },
     // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
     // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
     // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
@@ -57,6 +58,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
     switch (sideMenu) {
       // case SideMenu.Dashboard:
       case SideMenu.Categories:
+        case SideMenu.Questions:
         case SideMenu.QuestionsAssignment: 
         {
           var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.Admin);
@@ -67,17 +69,18 @@ export class SidebarComponent extends BaseComponent implements OnInit {
             return false;
           }
         } 
-        case SideMenu.Questions:  
-        {
-          var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.Admin || item.roleId == Roles.User);
-          if (roleCheck) {
-            return true;
-          }
-          else {
-            return false;
-          }
-        } 
-        case SideMenu.Quiz:  
+        // case SideMenu.Questions:  
+        // {
+        //   var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.Admin || item.roleId == Roles.User);
+        //   if (roleCheck) {
+        //     return true;
+        //   }
+        //   else {
+        //     return false;
+        //   }
+        // } 
+        case SideMenu.MockTest:  
+        // case SideMenu.Quiz:  
         {
           var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.User);
           if (roleCheck) {

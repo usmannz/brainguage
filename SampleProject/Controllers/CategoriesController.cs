@@ -39,5 +39,13 @@ namespace SampleProject.Controllers
             int deletedBy = this.User.GetUserId();
             return Ok(await _categoryService.DeleteCategory(categoryId, deletedBy));
         }
+
+        [HttpGet("GetAllDropDownCategories")]
+        public async Task <ApiResponse<List<Categories>>> GetAllDropDownCategories()
+        {
+            return await _categoryService.GetAllDropDownCategories();
+
+        }
+
     }
 }

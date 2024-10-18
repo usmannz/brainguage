@@ -10,6 +10,7 @@ import { QuestionAssignmentComponent } from './pages/questions/question-assignem
 import { RegisterComponent } from './pages/register/register.component';
 import { QuizComponent } from './pages/quiz/questions/admin-question-listing/quiz.component';
 import { CategoriesListingComponent } from './pages/categories/categories-listing/categories-listing.component';
+import { MockTestComponent } from './pages/mock-test/questions/admin-question-listing/mock-test.component';
 
 const routes: Routes =[
   // { path: 'dashboard', pathMatch: 'full', component: DashboardComponent,canActivate: [AuthGuard]  },
@@ -17,6 +18,7 @@ const routes: Routes =[
   { path: 'questions-assignment', pathMatch: 'full', component: QuestionAssignmentComponent,canActivate: [AuthGuard]  },
   { path: 'quiz', pathMatch: 'full', component: QuizComponent,canActivate: [AuthGuard]  },
   { path: 'categories', pathMatch: 'full', component: CategoriesListingComponent,canActivate: [AuthGuard]  },
+  { path: 'mock-test', pathMatch: 'full', component: MockTestComponent,canActivate: [AuthGuard]  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: AdminQuestionsListingComponent,canActivate: [AuthGuard] },

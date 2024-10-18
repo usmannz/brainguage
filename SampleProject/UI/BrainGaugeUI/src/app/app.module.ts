@@ -40,6 +40,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { QuizComponent } from './pages/quiz/questions/admin-question-listing/quiz.component';
 import { CategoriesListingComponent } from './pages/categories/categories-listing/categories-listing.component';
 import { CategoryEditComponent } from './pages/categories/categories-edit/category-edit.component';
+import { MockTestComponent } from './pages/mock-test/questions/admin-question-listing/mock-test.component';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { CategoryEditComponent } from './pages/categories/categories-edit/catego
     AdminQuestionsListingComponent,
     QuestionAssignmentComponent,
     QuizComponent,
+    MockTestComponent,
     UserProfileComponent,
     LoginComponent,
     RegisterComponent,

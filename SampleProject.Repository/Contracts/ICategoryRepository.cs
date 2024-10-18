@@ -14,5 +14,6 @@ namespace SampleProject.Repository.Contracts
     Task<ViewModelCategoriesListing> GetAllCategories(Pager pagination);
     Task<int> SaveCategory(Categories category);
     Task<int> DeleteCategory(int categoryId, int deletedBy);
+    Task<List<Categories>> GetAllDropDownCategories();
     }
 }

@@ -117,12 +117,28 @@ public async Task<int> SaveCategory(Categories category)
    
      public async Task<int> DeleteCategory(int categoryId, int deletedBy)
         {  
+            var question = _context.Questions.Where(x => x.CategoriesId == categoryId && !x.IsDeleted).FirstOrDefault();
+              if(question != null)
+              {
+            return -1;
+              }
             var category = _context.Categories.Where(x => x.Id == categoryId).SingleOrDefault();
             category.IsDeleted = true;
             category.DeletedBy = deletedBy;
             category.DeleteStamp = DateTime.UtcNow;
             await _context.SaveChangesAsync();
             return category.Id;
+        }
+ public async Task<List<Categories>> GetAllDropDownCategories()
+        {
+            List<Categories> listCategories = new List<Categories>();
+
+            listCategories = await _context.Categories
+                .Where(x => !x.IsDeleted)
+                .AsNoTracking().ToListAsync();
+
+            return listCategories;
+
         }
 
     }

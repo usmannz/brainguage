@@ -171,6 +171,8 @@ namespace SampleProject.API
             services.AddScoped<IQuizRepository, QuizRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IMockTestService, MockTestService>();
+            services.AddScoped<IMockTestRepository, MockTestRepository>();
 
 
         }

@@ -19,20 +19,154 @@
         Question is required
       </div>
     </div>
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <div class="checkbox mb-3">
+        <label class="custom-container"> Mock up
+            <input formControlName="isMockExam" type="checkbox" value="remember-me">
+            <span class="custom-checkmark"></span>
+        </label>
+    </div>
+    </div>
+    <div class="form-group col-md-6">
+      <div class="checkbox mb-3">
+        <label class="custom-container"> Demo
+            <input formControlName="isDemo" type="checkbox" value="remember-me">
+            <span class="custom-checkmark"></span>
+        </label>
+    </div>
+    </div>
+  </div>
     <div class="form-group">
-      <label for="answer"
-        [ngClass]="{'error': submitted && myQuestionForm.answer.errors}">Answer<sup>*</sup></label>
+      <label for="categoriesId"
+          [ngClass]="{'error': submitted && myQuestionForm.categoriesId.errors}">Categories<sup>*</sup></label>
+      <select class="custom-select" id="categoriesId" formControlName="categoriesId">
+          <option [value]=0>Choose...</option>
+          <ng-container *ngFor="let cat of listCategories">
+              <option [value]=cat.id>{{cat.name}}</option>
+          </ng-container>
+      </select>
+      <!-- error block -->
+      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.categoriesId.errors?.required">
+          Category is required
+      </div>
+      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.categoriesId.errors?.min">
+        Category is required
+      </div>
+  </div>
+    <div class="form-group">
+      <label for="description"
+        [ngClass]="{'error': submitted && myQuestionForm.description.errors}">Description<sup>*</sup></label>
       <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
-        id="answer" formControlName="answer" #answer placeholder="Enter answer"
+        id="description" formControlName="description" #description placeholder="Enter description"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         maxlength="5000"></textarea>
         <label class="nopadding characters-remaining-textarea clrlbl">
-          {{answer.value.length}} / 5000 characters left.
+          {{description.value.length}} / 5000 characters left.
         </label>
-      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.answer.errors?.required">
-        Answer is required
+      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.description.errors?.required">
+        Description is required
       </div>
     </div>
+    <div class="form-group">
+      <label for="option1"
+        [ngClass]="{'error': submitted && myQuestionForm.option1.errors}">option 1<sup>*</sup></label>
+      <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
+        id="option1" formControlName="option1" #option1 placeholder="Enter option 1"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="5000"></textarea>
+        <label class="nopadding characters-remaining-textarea clrlbl">
+          {{option1.value.length}} / 5000 characters left.
+        </label>
+      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option1.errors?.required">
+        Option 1 is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="option2"
+        [ngClass]="{'error': submitted && myQuestionForm.option2.errors}">option 2<sup>*</sup></label>
+      <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
+        id="option2" formControlName="option2" #option2 placeholder="Enter option 2"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="5000"></textarea>
+        <label class="nopadding characters-remaining-textarea clrlbl">
+          {{option2.value.length}} / 5000 characters left.
+        </label>
+      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option2.errors?.required">
+        Option 2 is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="option3"
+        [ngClass]="{'error': submitted && myQuestionForm.option3.errors}">option 3<sup>*</sup></label>
+      <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
+        id="option3" formControlName="option3" #option3 placeholder="Enter option 3"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="5000"></textarea>
+        <label class="nopadding characters-remaining-textarea clrlbl">
+          {{option3.value.length}} / 5000 characters left.
+        </label>
+      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option3.errors?.required">
+        Option 3 is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="option4"
+        [ngClass]="{'error': submitted && myQuestionForm.option4.errors}">option 4<sup>*</sup></label>
+      <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
+        id="option4" formControlName="option4" #option4 placeholder="Enter option 4"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="5000"></textarea>
+        <label class="nopadding characters-remaining-textarea clrlbl">
+          {{option4.value.length}} / 5000 characters left.
+        </label>
+      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option4.errors?.required">
+        Option 4 is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="option5"
+        [ngClass]="{'error': submitted && myQuestionForm.option5.errors}">option 5<sup>*</sup></label>
+      <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
+        id="option5" formControlName="option5" #option5 placeholder="Enter option 5"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="5000"></textarea>
+        <label class="nopadding characters-remaining-textarea clrlbl">
+          {{option5.value.length}} / 5000 characters left.
+        </label>
+      <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option5.errors?.required">
+        Option 5 is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="correctAnswer"
+        [ngClass]="{'error': submitted && questionForm.get('correctAnswer').errors}">
+        Correct Answer
+      </label>
+    
+      <div>
+        <label for="option1">Option 1: </label>
+        <input type="radio" formControlName="correctAnswer" [value]="1" />
+        <label for="option2">Option 2: </label>
+        <input type="radio" formControlName="correctAnswer" [value]="2" />
+        <label for="option3">Option 3: </label>
+        <input type="radio" formControlName="correctAnswer" [value]="3" />
+        <label for="option4">Option 4: </label>
+        <input type="radio" formControlName="correctAnswer" [value]="4" />
+        <label for="option5">Option 5: </label>
+        <input type="radio" formControlName="correctAnswer" [value]="5" />
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="question"
+        [ngClass]="{'error': submitted && myQuestionForm.question.errors}">Upload Image</label>
+        <input type="file" formControlName="file" (change)="onFileSelected($event)" accept="image/*" />
+    </div>
+     <div *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="Current Question Image" style="max-width: 200px; max-height: 200px;" />
+    </div>
+
     </form>
   </div>
   <div class="modal-footer border-0">

@@ -26,7 +26,7 @@ export class QuestionService {
         return this._http.get<any>(`${Settings.apiBase}questions/questiondropdown`);
     }
 
-    insertQuestion(question: Questions): Observable<number> {
+    insertQuestion(question: any): Observable<number> {
         return this._http.post<number>(`${Settings.apiBase}questions/savequestion`, question)
     }
 
