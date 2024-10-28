@@ -65,6 +65,12 @@
       <span class="d-none d-md-block d-lg-block">Mock Test</span>
   </a>
 </li>
+<li class="nav-item" *ngIf="checkUserRole(sideMenu.DemoTest)">
+  <a routerLink="/demo-test"  class="nav-link" [ngClass]="CurrentPage == 7 ? 'active': ''">
+      <i class="ni ni-tv-2 text-primary"></i>
+      <span class="d-none d-md-block d-lg-block">Demo Test</span>
+  </a>
+</li>
       </ul>
       <!-- <hr class="my-3">
       <h6 class="navbar-heading text-muted">Documentation</h6>

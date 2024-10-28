@@ -18,6 +18,8 @@ namespace SampleProject.Repository
         public virtual DbSet<UserQuiz> UserQuiz { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<MockTest> MockTest { get; set; }
+        public virtual DbSet<DemoTest> DemoTest { get; set; }
+
 
         public DBContext()
     {

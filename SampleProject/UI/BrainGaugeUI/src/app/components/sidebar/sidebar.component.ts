@@ -17,6 +17,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/quiz', title: 'Quiz',  icon:'ni-planet text-blue', class: '' },
     { path: '/categories', title: 'Categories',  icon:'ni-planet text-blue', class: '' },
     { path: '/mock-test', title: 'Mock Test',  icon:'ni-planet text-blue', class: '' },
+    { path: '/demo-test', title: 'Demo Test',  icon:'ni-planet text-blue', class: '' },
+
     // { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '' },
     // { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
     // { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
@@ -79,6 +81,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
         //     return false;
         //   }
         // } 
+        case SideMenu.DemoTest:  
         case SideMenu.MockTest:  
         // case SideMenu.Quiz:  
         {

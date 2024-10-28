@@ -173,7 +173,8 @@ namespace SampleProject.API
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IMockTestService, MockTestService>();
             services.AddScoped<IMockTestRepository, MockTestRepository>();
-
+            services.AddScoped<IDemoTestService, DemoTestService>();
+            services.AddScoped<IDemoTestRepository, DemoTestRepository>();
 
         }
 
