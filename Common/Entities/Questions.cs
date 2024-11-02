@@ -22,6 +22,7 @@ public class Questions : IEntity
         public string Option4 { get; set; }  =  string.Empty;
         public string Option5 { get; set; }  =  string.Empty;
         public bool isMockExam { get; set; }
+        public bool isPrepExam { get; set; }
         public bool IsDemo { get; set; }
         public int CategoriesId { get; set; }
         public string? PictureUrl { get; set; } = string.Empty;
@@ -51,6 +52,7 @@ public class Questions : IEntity
         public string Option5 { get; set; }  =  string.Empty;
         public int CorrectAnswer { get; set; } = 0;
         public bool isMockExam { get; set; }
+        public bool isPrepExam { get; set; }
         public bool IsDemo { get; set; }
         public int CategoriesId { get; set; }
         public string? PictureUrl { get; set; } = string.Empty;
@@ -91,6 +93,7 @@ public class Questions : IEntity
         public string Option5 { get; set; } = string.Empty;
         public int CorrectAnswer { get; set; } = 0;
         public bool IsMockExam { get; set; }
+        public bool IsPrepExam { get; set; }
         public bool IsDemo { get; set; }
         public int CategoriesId { get; set; }
         public IFormFile File { get; set; }  // Ensure this is present

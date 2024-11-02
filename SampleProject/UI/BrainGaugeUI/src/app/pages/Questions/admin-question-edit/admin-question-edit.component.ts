@@ -33,6 +33,7 @@ export class AdminQuestionEditComponent extends BasePopupComponent  implements O
     option5: ['', [Validators.required, Validators.maxLength(5000)]],
     isMockExam: [true],
     isDemo: [true],
+    isPrepExam: [true],
     categoriesId: [0, [Validators.required, Validators.min(1)]],
     file: [],
     correctAnswer: [1, [Validators.required]]
@@ -90,6 +91,7 @@ insertQuestion(question: Questions) {
   formData.append('option4', this.questionForm.get('option4')?.value);
   formData.append('option5', this.questionForm.get('option5')?.value);
   formData.append('isMockExam', this.questionForm.get('isMockExam')?.value.toString());
+  formData.append('isPrepExam', this.questionForm.get('isPrepExam')?.value.toString());
   formData.append('isDemo', this.questionForm.get('isDemo')?.value.toString());
   formData.append('categoriesId', this.questionForm.get('categoriesId')?.value.toString());
   formData.append('correctAnswer', this.questionForm.get('correctAnswer')?.value.toString());
@@ -132,6 +134,7 @@ saveQuestion() {
           option4: this.questionForm.value.option4,
           option5: this.questionForm.value.option5,
           isMockExam: this.questionForm.value.isMockExam,
+          isPrepExam: this.questionForm.value.isPrepExam,
           isDemo: this.questionForm.value.isDemo,
           categoriesId: this.questionForm.value.categoriesId,
           file: this.questionForm.value.file,

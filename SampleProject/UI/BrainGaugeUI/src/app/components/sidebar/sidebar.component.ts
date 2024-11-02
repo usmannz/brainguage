@@ -83,6 +83,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
         // } 
         case SideMenu.DemoTest:  
         case SideMenu.MockTest:  
+        case SideMenu.PrepTest:  
         // case SideMenu.Quiz:  
         {
           var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.User);

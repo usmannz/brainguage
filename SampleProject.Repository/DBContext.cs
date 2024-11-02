@@ -11,7 +11,7 @@ namespace SampleProject.Repository
     public partial class DBContext : DbContext
     {
         public virtual DbSet<Users> Users { get; set; }
-          public virtual DbSet<UserRoles> UserRoles { get; set; }
+        public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
         public virtual DbSet<QuestionsAssignment> QuestionsAssignment { get; set; }
@@ -19,6 +19,9 @@ namespace SampleProject.Repository
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<MockTest> MockTest { get; set; }
         public virtual DbSet<DemoTest> DemoTest { get; set; }
+        public virtual DbSet<PrepTest> PrepTest { get; set; }
+        public virtual DbSet<PrepTestConfig> PrepTestConfig { get; set; }
+        public virtual DbSet<PrepTestConfigCategory> PrepTestConfigCategory { get; set; }
 
 
         public DBContext()

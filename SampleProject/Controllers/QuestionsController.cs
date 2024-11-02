@@ -42,6 +42,7 @@ namespace SampleProject.Controllers
                 Option4 = questionDto.Option4,
                 Option5 = questionDto.Option5,
                 isMockExam = questionDto.IsMockExam,
+                isPrepExam =questionDto.IsPrepExam,
                 IsDemo = questionDto.IsDemo,
                 CategoriesId = questionDto.CategoriesId,
                 CorrectAnswer = questionDto.CorrectAnswer,

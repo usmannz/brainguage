@@ -1,0 +1,112 @@
+
+
+<h1 class="card-header text-white bg-default">Prep Test Configurations</h1>
+
+<div class="custom-form">
+  <div class="modal-body modal-center-scroll">
+    <form [formGroup]="prepTestConfigForm">
+    <div class="form-group">
+      <label for="name"
+        [ngClass]="{'error': submitted && myprepTestConfigForm.name.errors}">Name<sup>*</sup></label>
+        <input type="text" class="form-control" id="name" formControlName="name"
+        placeholder="Enter test name" [ngClass]="{ error: submitted && myprepTestConfigForm.name.errors }"/>
+      <div class="invalid-feedback" *ngIf="submitted && myprepTestConfigForm.name.errors?.required">
+        Name is required
+      </div>
+      <div class="invalid-feedback" *ngIf="submitted && myprepTestConfigForm.name.errors?.maxlength">
+        Maximum of 200 characters are allowed
+    </div>
+
+    </div>
+    <div class="form-group">
+      <label for="timeBox"
+        [ngClass]="{'error': submitted && myprepTestConfigForm.timeBox.errors}">Time Box<sup>*</sup></label>
+        <input type="number" class="form-control" id="timeBox" formControlName="timeBox"
+        placeholder="Enter time box" [ngClass]="{ error: submitted && myprepTestConfigForm.timeBox.errors }"/>
+      <div class="invalid-feedback" *ngIf="submitted && myprepTestConfigForm.timeBox.errors?.required">
+        Time box is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="totalQuestions"
+        [ngClass]="{'error': submitted && myprepTestConfigForm.totalQuestions.errors}">Total Questions<sup>*</sup></label>
+        <input type="number" class="form-control" id="totalQuestions" formControlName="totalQuestions"
+        placeholder="Enter total questions" [ngClass]="{ error: submitted && myprepTestConfigForm.totalQuestions.errors }"/>
+      <div class="invalid-feedback" *ngIf="submitted && myprepTestConfigForm.totalQuestions.errors?.required">
+        Total questions is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="categories">Categories<sup>*</sup></label>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-select formControlName="categories" placeholder="Select categories" multiple>
+          <mat-option *ngFor="let category of listCategories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="invalid-feedback" *ngIf="submitted && prepTestConfigForm.controls.categories.errors?.required">
+        At least one category must be selected
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="categories">Test Criteria<sup>*</sup></label>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-select formControlName="questionCriteria" placeholder="Select Question Criteria">
+          <mat-option value="all">All Questions</mat-option>
+          <mat-option value="unAttempted">Unattempted</mat-option>
+          <mat-option value="wrong">Wrong Answers</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+    </div>
+    <div class="form-row">
+    <!-- <div class="form-group col-md-3">
+      <div class="checkbox mb-3">
+        <label class="custom-container"> Un Attempt Questions
+            <input formControlName="unAttemptQuestions" type="checkbox" value="remember-me">
+            <span class="custom-checkmark"></span>
+        </label>
+    </div>
+    </div>
+    <div class="form-group col-md-3">
+      <div class="checkbox mb-3">
+        <label class="custom-container"> Wrong Answers
+            <input formControlName="wrongAnswers" type="checkbox" value="remember-me">
+            <span class="custom-checkmark"></span>
+        </label>
+    </div>
+    </div>
+    <div class="form-group col-md-3">
+      <div class="checkbox mb-3">
+        <label class="custom-container"> All Questions
+            <input formControlName="allQuestions" type="checkbox" value="remember-me">
+            <span class="custom-checkmark"></span>
+        </label>
+    </div>
+    </div> -->
+    <div class="form-group col-md-12">
+      <div class="checkbox mb-3">
+        <label class="custom-container"> Result End
+            <input formControlName="resultEnd" type="checkbox" value="remember-me">
+            <span class="custom-checkmark"></span>
+        </label>
+    </div>
+    </div>
+    </div>
+    </form>
+  </div>
+  <div class="modal-footer border-0">
+    <!-- <button mat-button value="Cancel" class="btn btn-primary login-btn-size" [mat-dialog-close]="false"
+      cdkFocusInitial>
+      Cancel
+    </button> -->
+    <button (click)="closeDialog()" [disabled]="isPrepTestConfigInProgress" type="button" class="btn btn-primary login-btn-size">Cancel</button>
+
+    <!-- <button  mat-button value="Confirm" class="btn btn-md btn-primary login-btn-size" [mat-dialog-close]="true" cdkFocusInitial>
+      Ok
+    </button> -->
+    <button (click)="savePrepTestConfig()" [disabled]="isPrepTestConfigInProgress" type="submit" class="btn btn-primary login-btn-size">Save<i class="fa fa-spinner fa-spin" *ngIf="isPrepTestConfigInProgress"></i></button>
+
+  </div>
+</div>

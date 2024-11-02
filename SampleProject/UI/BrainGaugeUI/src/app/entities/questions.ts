@@ -14,6 +14,7 @@ export class Questions {
     option4: string;
     option5: string;
     isMockExam: boolean;
+    isPrepExam:boolean;
     isDemo: boolean;
     categoriesId: number;
     pictureWebPath: any;

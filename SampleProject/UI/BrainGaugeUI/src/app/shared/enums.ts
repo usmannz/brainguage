@@ -8,6 +8,7 @@ export enum SideMenu {
     Categories = 5,
     MockTest = 6,
     DemoTest =7,
+    PrepTest =8,
 }
 
 export enum Roles {
@@ -28,7 +29,8 @@ export enum Pages {
     Quiz = 4,
     Categories = 5,
     MockTest = 6,
-    DemoTest =7
+    DemoTest =7,
+    PrepTest =8,
 }
 
 export enum SortFields {

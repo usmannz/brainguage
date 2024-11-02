@@ -12,6 +12,8 @@ import { AdminQuestionsListingComponent } from './pages/questions/admin-question
 import { QuestionAssignmentComponent } from './pages/questions/question-assignement/question-assignment.component';
 import { MockTestComponent } from './pages/mock-test/mock-test.component';
 import { DemoTestComponent } from './pages/demo-test/demo-test.component';
+import { PrepTestListingComponent } from './pages/prep-test/prep-test-listing/prep-test-listing.component';
+import { PrepTestComponent } from './pages/prep-test/prep-test/prep-test.component';
 
 const routes: Routes =[
   // { path: 'dashboard', pathMatch: 'full', component: DashboardComponent,canActivate: [AuthGuard]  },
@@ -21,6 +23,9 @@ const routes: Routes =[
   { path: 'categories', pathMatch: 'full', component: CategoriesListingComponent,canActivate: [AuthGuard]  },
   { path: 'mock-test', pathMatch: 'full', component: MockTestComponent,canActivate: [AuthGuard]  },
   { path: 'demo-test', pathMatch: 'full', component: DemoTestComponent,canActivate: [AuthGuard]  },
+  { path: 'prep-test-listing', pathMatch: 'full', component: PrepTestListingComponent,canActivate: [AuthGuard]  },
+  { path: 'prep-test/:prepTestConfigId', pathMatch: 'full', component: PrepTestComponent,canActivate: [AuthGuard]  },
+
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: AdminQuestionsListingComponent,canActivate: [AuthGuard] },

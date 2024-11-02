@@ -1,0 +1,172 @@
+<!-- Sidenav -->
+<app-sidebar  CurrentPage="9"></app-sidebar>
+<div class="main-content">
+  <!-- Top navbar -->
+  <app-navbar></app-navbar>
+  <!-- Pages -->
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+     
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+      
+        <div class="row align-items-center">
+          <div class="col-8">
+            <div class="card-header bg-transparent border-0">
+            <h3 class="text-white mb-0">Prep Test</h3>
+          </div>
+          </div>
+          <div class="col-4 text-right">
+            <div class="card-header bg-transparent border-0">
+            <!-- <a (click)="generatePrepTest()"  class="btn btn-sm btn-primary">Generate Mock Test</a> -->
+          </div>
+          </div>
+<!-- QUIZ -->
+          <!-- <div class="row">
+            <div class="col-6">
+              <h3>Quiz Application</h3>
+            </div>
+            <div class="col-6 text-right">
+              Select Quiz:
+              <select [(ngModel)]="quizName" (change)="loadQuiz(quizName)">
+                <option *ngFor="let quiz of quizes" [value]="quiz.id">{{quiz.name}}</option>
+              </select>
+            </div>
+          </div> -->
+          <div class="card-body" id="quiz">
+            <!-- <h2 class="text-center font-weight-normal">{{quiz.name}}</h2>
+            <hr /> -->
+            <div class="row" *ngIf="listQuiz.length > 0">
+              <div class="col-xl-12 col-lg-12">
+
+            <div *ngIf="mode=='quiz' && listQuiz.length > 0">
+              <div *ngFor="let question of filteredQuestions;">
+                <div class="badge badge-info">Question {{pager.index + 1}} of {{pager.count}}.</div>
+                <div *ngIf="this.listQuiz[0]?.timeBox" class="badge badge-info float-right">Time: {{ellapsedTime}} / {{duration}}</div> 
+                <div class="card-header bg-transparent border-0">
+                <h3 class="font-weight-normal text-white mb-0">{{pager.index + 1}}.
+                  <span [innerHTML]="question.question"></span>
+                </h3>
+                </div>
+                <div class="row text-left options">
+                  <div class="col-6">
+                    <div class="option"  style="margin-left: 30px;">
+                          <!-- Loop through options 1 to 5 -->
+                          <div *ngFor="let option of getOptions(question); let i = index" class="option-group">
+                            <input
+                              type="radio"
+                              [id]="'option' + (i + 1) + '-' + question.id"
+                              [name]="'options-' + question.id"
+                              [value]="i + 1"
+                              [(ngModel)]="question.answer"
+                              class="form-check-input text-white mb-0">
+                            <label
+                              [for]="'option' + (i + 1) + '-' + question.id"
+                              class="form-check-label text-white mb-0"
+                             > <!-- Adjust this value for more or less margin -->
+                              {{ option }}
+                            </label>
+                          </div>
+
+                      <!-- <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
+                      id="answer" [(ngModel)]="question.answer"  #answer placeholder="Enter your answer"
+                      oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                      maxlength="5000"></textarea>
+                      <label class="nopadding characters-remaining-textarea clrlbl">
+                        {{answer.value.length}} / 5000 characters left.
+                      </label> -->
+                      <!-- <label class="font-weight-normal" [attr.for]="option.id">
+                        <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" /> {{option.name}}
+                      </label> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="text-center">
+                <button class="btn btn-primary" *ngIf="config.allowBack" (click)="goTo(0);">First</button>
+                <button class="btn btn-primary" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
+                <button class="btn btn-primary" (click)="goTo(pager.index + 1);">Next</button>
+                <button class="btn btn-primary" *ngIf="config.allowBack" (click)="goTo(pager.count - 1);">Last</button>
+                <!--<pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
+              </div>
+            </div>
+          
+            <div class="row text-center" *ngIf="mode=='review'">
+              <div class="col-4 cursor-pointer" *ngFor="let question of listQuiz; let index = index;">
+                <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == true? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
+              </div>
+            </div>
+            <div class="result" *ngIf="mode=='result'">
+              <h2 class="text-white mb-0">Quiz Result</h2>
+              <div *ngFor="let question of listQuiz; let index = index">
+                <div class="result-question"style="margin-bottom: 10px;" >
+                  <h5 class="text-white mb-0">{{index + 1}}. {{question.question}}</h5>
+                  <div class="row">
+                    <div class="col-6" >
+                      <div class="option"  style="margin-left: 30px; margin-top: 10px;" >
+                        <!-- Loop through options 1 to 5 -->
+                        <div *ngFor="let option of getOptions(question); let i = index" class="option-group">
+                          <input 
+                            type="radio"
+                            [id]="'option' + (i + 1) + '-' + question.id"
+                            [name]="'options-' + question.id"
+                            [value]="i + 1"
+                            [(ngModel)]="question.answer"
+                            class="form-check-input text-white mb-0"
+                            >
+                          <label
+                            [for]="'option' + (i + 1) + '-' + question.id"
+                            class="form-check-label text-white mb-0"
+                           > <!-- Adjust this value for more or less margin -->
+                            {{ option }}
+                          </label>
+                        </div>
+
+                    <!-- <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
+                    id="answer" [(ngModel)]="question.answer"  #answer placeholder="Enter your answer"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    maxlength="5000"></textarea>
+                    <label class="nopadding characters-remaining-textarea clrlbl">
+                      {{answer.value.length}} / 5000 characters left.
+                    </label> -->
+                    <!-- <label class="font-weight-normal" [attr.for]="option.id">
+                      <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" /> {{option.name}}
+                    </label> -->
+                  </div>
+                      <h3 style="margin-top: 10px;" class="text-white mb-0">{{getResult(question)}}</h3>
+                    </div>
+
+                    <!-- <div class="col-6" *ngFor="let Option of question.options">
+                      <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}}
+                    </div> -->
+                  </div>
+                  <!-- <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div> -->
+                </div>
+              </div>
+              <h4 (click)="closeWindow(index)" class="alert alert-info text-center">You may close this window now.</h4>
+            </div>
+            <hr />
+            <div *ngIf="mode!='result'">
+              <button class="btn btn-warning" (click)="mode = 'quiz'">Quiz</button>
+              <button class="btn btn-info" (click)="mode = 'review'">Review</button>
+              <button class="btn btn-primary" (click)="onSubmit();">Submit Quiz</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>  
+</div>  
+</div>  
+
+

@@ -42,6 +42,9 @@ import { CategoriesListingComponent } from './pages/categories/categories-listin
 import { CategoryEditComponent } from './pages/categories/categories-edit/category-edit.component';
 import { MockTestComponent } from './pages/mock-test/mock-test.component';
 import { DemoTestComponent } from './pages/demo-test/demo-test.component';
+import { PrepTestListingComponent } from './pages/prep-test/prep-test-listing/prep-test-listing.component';
+import { PrepTestConfigComponent } from './pages/prep-test/prep-test-config/prep-test-config.component';
+import { PrepTestComponent } from './pages/prep-test/prep-test/prep-test.component';
 
 
 @NgModule({
@@ -89,6 +92,9 @@ import { DemoTestComponent } from './pages/demo-test/demo-test.component';
     ConfirmationDialogComponent,
     CategoriesListingComponent,
     CategoryEditComponent,
+    PrepTestListingComponent,
+    PrepTestConfigComponent,
+    PrepTestComponent
 
 
   ],
@@ -103,7 +109,8 @@ import { DemoTestComponent } from './pages/demo-test/demo-test.component';
   ],
   entryComponents: [
     AdminQuestionEditComponent,
-    CategoryEditComponent
+    CategoryEditComponent,
+    PrepTestConfigComponent
 ],
   bootstrap: [AppComponent]
 })

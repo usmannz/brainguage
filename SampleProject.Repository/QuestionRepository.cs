@@ -74,6 +74,7 @@ namespace SampleProject.Repository
                     Option5 = x.Option5,
                     isMockExam = x.isMockExam,
                     IsDemo = x.IsDemo,
+                    isPrepExam = x.isPrepExam,
                     CorrectAnswer = x.CorrectAnswer,
                     CategoriesId = x.CategoriesId,
                     PictureUrl = x.PictureUrl,
@@ -140,6 +141,7 @@ public async Task<int> SaveQuestion(Questions question, IFormFile File)
             questionEntity.Option4 =question.Option4;
             questionEntity.Option5 =question.Option5;
                         questionEntity.isMockExam =question.isMockExam;
+                        questionEntity.isPrepExam = question.isPrepExam;
             questionEntity.IsDemo =question.IsDemo;
             questionEntity.CategoriesId =question.CategoriesId;
             questionEntity.CorrectAnswer = question.CorrectAnswer;
