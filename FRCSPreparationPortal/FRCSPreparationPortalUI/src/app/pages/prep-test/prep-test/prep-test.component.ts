@@ -234,5 +234,7 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
   closeWindow ()
 {
   this.listQuiz =[];
+  this._router.navigate(['/prep-test-listing'])
+
 }
 }

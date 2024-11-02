@@ -41,7 +41,7 @@ location: Location,  private element: ElementRef) {
             return this.listTitles[item].title;
         }
     }
-    return 'Questions';
+    return '';
   }
 
   btnLogout_Clicked()
