@@ -58,7 +58,7 @@ insertCategory(category: Categories) {
     {
       if(d?.data == -1)
         {
-          this.toastService.showError("Category name should be unique.", "Category");
+          this.toastService.showWarning("Category name should be unique.", "Category");
     
         }
         else

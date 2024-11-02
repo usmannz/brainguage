@@ -183,13 +183,12 @@ export class CategoriesListingComponent extends BaseComponent  implements OnInit
           }
           else if (d.status.code ==200 && d?.data == -1)
           {
-            this.toastService.showWarning("Can't delete category is associated with a question.", "Category");
+            this.toastService.showWarning("Can't delete category that is associated with a question.", "Category");
           }
         }
         else
         {
-          this.toastService.showWarning("Error.", "Category");
-
+          this.toastService.showWarning("Can't delete category that is associated with a question.", "Category");
         }
         });
         
