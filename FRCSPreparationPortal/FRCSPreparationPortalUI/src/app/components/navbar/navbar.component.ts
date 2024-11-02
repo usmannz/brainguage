@@ -29,9 +29,12 @@ location: Location,  private element: ElementRef) {
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if(titlee.charAt(0) === '#'){
-        titlee = titlee.slice( 1 );
-    }
+    titlee = titlee.split('/')[1];  // Extracts "prep-test"
+
+    // if(titlee.charAt(0) === '#' || titlee.charAt(0) === '/'){
+    //     titlee = titlee.slice( 1 );
+    // }
+    console.log(titlee)
 
     for(var item = 0; item < this.listTitles.length; item++){
         if(this.listTitles[item].path === titlee){

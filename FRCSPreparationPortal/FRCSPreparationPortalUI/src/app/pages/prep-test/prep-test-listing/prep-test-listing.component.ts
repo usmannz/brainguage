@@ -138,9 +138,12 @@ export class PrepTestListingComponent extends BaseComponent  implements OnInit {
   }
 
   routeToPrepTest(prepTestConfigId: number) {
-    var url = `prep-test/${prepTestConfigId}}`
-   this._router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-     this._router.navigate([url]));
+
+   var url = `prep-test/${prepTestConfigId}`;
+this._router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+  this._router.navigate([url])
+);
+
 
   }
 }

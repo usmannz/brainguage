@@ -54,6 +54,9 @@
                 <h3 class="font-weight-normal text-white mb-0">{{pager.index + 1}}.
                   <span [innerHTML]="question.question"></span>
                 </h3>
+                <div *ngIf="question.pictureWebPath">
+                  <img [src]="question.pictureWebPath" alt="Current Question Image" style="max-width: 400px; max-height: 400px;" />
+                </div>
                 </div>
                 <div class="row text-left options">
                   <div class="col-6">

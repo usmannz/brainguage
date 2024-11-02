@@ -69,21 +69,21 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
   ngOnInit() {
     super.ngOnInit();
     // this.quizes = this._prepTestService.getPrepTestById(this.prepTestConfigId);
-    this.quizName = this.quizes[0].id;
+    // this.quizName = this.quizes[0].id;
 
   }
-  loadQuiz(quizName: string) {
-  //   let getQuestion = this.mockTestService.get(quizName);
-  //  this.quiz = new Quiz(getQuestion);
-  //   this.pager.count = this.quiz.questions.length;
-  //   this.startTime = new Date();
-  //   this.ellapsedTime = "00:00";
-  //   this.timer = setInterval(() => {
-  //     this.tick();
-  //   }, 1000);
-  //   this.duration = this.parseTime(this.config.duration);
-  //   this.mode = "quiz";
-  }
+  // loadQuiz(quizName: string) {
+  // //   let getQuestion = this.mockTestService.get(quizName);
+  // //  this.quiz = new Quiz(getQuestion);
+  // //   this.pager.count = this.quiz.questions.length;
+  // //   this.startTime = new Date();
+  // //   this.ellapsedTime = "00:00";
+  // //   this.timer = setInterval(() => {
+  // //     this.tick();
+  // //   }, 1000);
+  // //   this.duration = this.parseTime(this.config.duration);
+  // //   this.mode = "quiz";
+  // }
 
   tick() {
     if(this.listQuiz.length > 0 && !this.quizSubmitted)
@@ -193,21 +193,15 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
         this.listQuiz = d.data;
         this.pager.count = this.listQuiz.length;
         this.quizSubmitted = false;
-    let getQuestion = this._prepTestService.get("javascript");
-   this.quiz = new Quiz(getQuestion);
-    this.pager.count = this.quiz.questions.length;
     this.startTime = new Date();
     this.ellapsedTime = "00:00";
+
+    this.config.duration = this.listQuiz[0]?.timeBox * 60;
+    this.duration = this.parseTime(this.config.duration);
+    this.mode = "quiz"; 
     this.timer = setInterval(() => {
       this.tick();
     }, 1000);
-    this.config.duration = this.listQuiz[0]?.timeBox * 60;
-    this.duration = this.parseTime(this.config.duration);
-    this.mode = "quiz";
-
-        this.timer = setInterval(() => {
-          this.tick();
-        }, 1000);
           }
       this.isFilterInProgress = false;
     });
@@ -225,14 +219,15 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
 
   getResult(question)
   {
+    const answerMap = ['A', 'B', 'C', 'D', 'E'];
     if( question.answer == question.correctAnswer)
     {
       return "Answer is Correct"
     }
     else
     {
-      return   `Option ${question.correctAnswer} is correct.`;
-    }
+      const correctOption = answerMap[question.correctAnswer - 1];
+      return `Option ${correctOption} is correct.`;     }
 
   }
 
