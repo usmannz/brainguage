@@ -54,8 +54,7 @@ export class AdminQuestionsListingComponent extends BaseComponent  implements On
 
   getPageData() {
     console.log(this.isAdmin,"ASD")
-    if(this.isAdmin)
-    {
+ 
       this._questionService.getAllQuestions(this.pagination).subscribe((d: any) => {
         console.log(d.data)
         console.log(d.status.code)
@@ -69,24 +68,6 @@ export class AdminQuestionsListingComponent extends BaseComponent  implements On
         }
         this.isFilterInProgress = false;
       });
-  
-    }
-    else
-    {
-        this._questionService.getAllUserQuestions(this.pagination,0).subscribe((d: any) => {
-        console.log(d.data)
-        console.log(d.status.code)
-        if(d?.data != null && d.status.code ==200)
-        {
-          this.listQuestions = d.data;
-          this.count = this.listQuestions.count;
-          console.log(this.listQuestions,"q")
-          console.log(this.count)
-    
-        }
-        this.isFilterInProgress = false;
-      });
-    }
   }
 
   onPageChange($event) {

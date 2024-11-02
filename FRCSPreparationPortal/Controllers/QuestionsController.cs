@@ -55,19 +55,6 @@ namespace FRCSPreparationPortal.Controllers
             int deletedBy = this.User.GetUserId();
             return Ok(await _questionService.DeleteQuestion(questionId, deletedBy));
         }
-        [Authorize(Roles = "Admin,User"),HttpPost("GetAllUsersQuestions/{userId}")]
-        public async Task<ApiResponse<ViewModelUserQuestionListing>> GetAllUsersQuestions([FromBody] Pager pagination,int userId)
-        {
-            if (userId == 0)
-                userId = UserId;
-            return await _questionService.GetAllUsersQuestions(pagination, userId);
-        }
 
-         [Authorize(Roles = "Admin"),HttpPost("AssignQuestions")]        
-        public async Task<IActionResult> AssignQestions([FromBody] List<QuestionsAssignment> question)
-        {
-            
-            return Ok(await _questionService.AssignQestions(question,UserId));
-        }
     }
 }

@@ -107,54 +107,6 @@ namespace FRCSPreparationPortal.Service
                     Data = 0 // Return an empty list in case of error
                 };
             }
-        }
-
-        public async Task<ApiResponse<ViewModelUserQuestionListing>> GetAllUsersQuestions(Pager pagination, int userId)
-        {
-            ViewModelUserQuestionListing listQuestions = new ViewModelUserQuestionListing();
-            try
-            {
-                listQuestions = await _questionRepository.GetAllUsersQuestions(pagination, userId);
-                return new ApiResponse<ViewModelUserQuestionListing>
-                {
-                    Status = new ApiResponseStatus { Code = 200, Message = "Success" },
-                    Data = listQuestions // listUsers may be an empty list if no users are found
-                };
-            }
-            catch (Exception ex)
-            {
-                return new ApiResponse<ViewModelUserQuestionListing>
-                {
-                    Status = new ApiResponseStatus { Code = 500, Message = "Internal Server Error" },
-                    Data = new ViewModelUserQuestionListing() // Return an empty list in case of error
-                };
-            }
-        }
-
-          public async Task<ApiResponse<int>> AssignQestions(List<QuestionsAssignment> question, int userId)
-        {
-
-          
-             try
-            {
-            var licenseid = await _questionRepository.AssignQestions(question,userId);
-              return new ApiResponse<int>
-                {
-                    Status = new ApiResponseStatus { Code = 200, Message = "Success" },
-                    Data = licenseid // listUsers may be an empty list if no users are found
-                };
-            }
-               catch (Exception ex)
-            {
-                return new ApiResponse<int>
-                {
-                    Status = new ApiResponseStatus { Code = 500, Message = "Internal Server Error" },
-                    Data = 0 // Return an empty list in case of error
-                };
-            }
-
-        }
-        
-
+        }        
     }
 }

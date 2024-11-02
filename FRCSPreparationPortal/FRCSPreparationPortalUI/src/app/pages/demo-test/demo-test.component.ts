@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { PageAccessType, Roles, SortDirection, SortFields } from 'src/app/shared/enums';
 import { ToastNotificationService } from 'src/app/services/toastr.service';
 import { Question, Quiz, QuizConfig,Option } from 'src/app/entities/quiz';
-import { QuizService } from 'src/app/services/quiz.service';
 import { DemoTestService } from 'src/app/services/demo-test.service';
 
 @Component({

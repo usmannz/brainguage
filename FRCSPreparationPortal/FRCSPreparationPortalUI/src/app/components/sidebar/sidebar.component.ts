@@ -13,8 +13,6 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '' },
     { path: '/questions', title: 'Questions',  icon:'ni-planet text-blue', class: '' },
-    { path: '/questions-assignment', title: 'Questions Assignment',  icon:'ni-planet text-blue', class: '' },
-    { path: '/quiz', title: 'Quiz',  icon:'ni-planet text-blue', class: '' },
     { path: '/categories', title: 'Categories',  icon:'ni-planet text-blue', class: '' },
     { path: '/mock-test', title: 'Mock Test',  icon:'ni-planet text-blue', class: '' },
     { path: '/demo-test', title: 'Demo Test',  icon:'ni-planet text-blue', class: '' },
@@ -61,7 +59,6 @@ export class SidebarComponent extends BaseComponent implements OnInit {
       // case SideMenu.Dashboard:
       case SideMenu.Categories:
         case SideMenu.Questions:
-        case SideMenu.QuestionsAssignment: 
         {
           var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.Admin);
           if (roleCheck) {
@@ -84,7 +81,6 @@ export class SidebarComponent extends BaseComponent implements OnInit {
         case SideMenu.DemoTest:  
         case SideMenu.MockTest:  
         case SideMenu.PrepTest:  
-        // case SideMenu.Quiz:  
         {
           var roleCheck = this._contextService._userRoles.find(item => item.roleId == Roles.User);
           if (roleCheck) {

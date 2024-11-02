@@ -34,10 +34,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { AdminQuestionsListingComponent } from './pages/questions/admin-question-listing/admin-question-listing.component';
 import { AdminQuestionEditComponent } from './pages/questions/admin-question-edit/admin-question-edit.component';
-import { QuestionAssignmentComponent } from './pages/questions/question-assignement/question-assignment.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { RegisterComponent } from './pages/register/register.component';
-import { QuizComponent } from './pages/quiz/questions/admin-question-listing/quiz.component';
 import { CategoriesListingComponent } from './pages/categories/categories-listing/categories-listing.component';
 import { CategoryEditComponent } from './pages/categories/categories-edit/category-edit.component';
 import { MockTestComponent } from './pages/mock-test/mock-test.component';
@@ -78,8 +76,6 @@ import { PrepTestComponent } from './pages/prep-test/prep-test/prep-test.compone
     AppComponent,
     DashboardComponent,
     AdminQuestionsListingComponent,
-    QuestionAssignmentComponent,
-    QuizComponent,
     MockTestComponent,
     DemoTestComponent,
     UserProfileComponent,

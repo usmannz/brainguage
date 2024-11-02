@@ -61,10 +61,12 @@ signUpUser(signUp: SignUp) {
     if(d?.data > 0 && d.status.code ==200)
         {
           this.toastService.showSuccess("Your Account has been created.", "success");
+          this.router.navigate(['/login']);
   }
   else
   {
     this.toastService.showWarning("Email Address already registered.", "warning");
+    
   }
   })
 

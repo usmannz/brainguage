@@ -84,7 +84,22 @@ export class LoginComponent extends BaseComponent implements OnInit {
                   this._cookieService.remove('emailAddress'),
                   this._cookieService.remove('remember')
               }
-              this._router.navigate([this._returnUrl]);
+              console.log(this._returnUrl)
+              if(this._returnUrl == "/")
+              {
+                if(this.isAdminRole())
+                {
+                    this._router.navigate(['/questions'])
+                }
+                else
+                {
+                    this._router.navigate(['/demo-test'])
+                }
+              }
+              else
+              {
+                this._router.navigate([this._returnUrl]);
+              }
           }
           else if (d.success == -1 )
           {

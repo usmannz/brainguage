@@ -14,8 +14,6 @@ namespace FRCSPreparationPortal.Repository
         public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
-        public virtual DbSet<QuestionsAssignment> QuestionsAssignment { get; set; }
-        public virtual DbSet<UserQuiz> UserQuiz { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<MockTest> MockTest { get; set; }
         public virtual DbSet<DemoTest> DemoTest { get; set; }

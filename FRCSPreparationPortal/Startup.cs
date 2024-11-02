@@ -167,8 +167,6 @@ namespace FRCSPreparationPortal.API
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
-            services.AddScoped<IQuizService, QuizService>();
-            services.AddScoped<IQuizRepository, QuizRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IMockTestService, MockTestService>();

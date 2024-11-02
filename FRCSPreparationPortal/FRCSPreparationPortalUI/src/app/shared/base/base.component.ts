@@ -65,11 +65,20 @@ export class BaseComponent {
             return;
         }
         let roleCheck = this.contextService._userRoles.filter(item => this._pageAccessLevel.some(o2 => item.roleId === o2));
-
-        if(roleCheck.length ==0)
-        {
-        this._router.navigate(['/questions'])
-        }
+         console.log(roleCheck,"rolechevk",roleCheck.length)
+         if(roleCheck.length == 0)
+          {
+          this._router.navigate(['/login'])
+          }
+        //  if(this.isAdminRole())
+        //  {
+        //   this._router.navigate(['/questions'])
+        //  }
+        //  else
+        //  {
+        //   this._router.navigate(['/demo-test'])
+        //  }
+       
         //// check token expiry
         var currentTime = new Date().getTime() / 1000;
         if (parseInt(this._contextService._session.exp) < currentTime) {

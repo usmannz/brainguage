@@ -14,8 +14,6 @@ namespace FRCSPreparationPortal.Service.Contracts
     Task<ApiResponse<ViewModelQuestionListing>> GetAllQuestions(Pager pagination);
     Task<ApiResponse<int>> SaveQuestion(Questions question, IFormFile File, int userId);
     Task<ApiResponse<int>> DeleteQuestion(int questionId, int deletedBy);
-    Task<ApiResponse<ViewModelUserQuestionListing>> GetAllUsersQuestions(Pager pagination, int userId);
-    Task<ApiResponse<int>> AssignQestions(List<QuestionsAssignment> question, int userId);
 
     }
 }

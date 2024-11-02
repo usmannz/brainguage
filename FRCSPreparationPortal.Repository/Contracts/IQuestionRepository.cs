@@ -15,9 +15,6 @@ namespace FRCSPreparationPortal.Repository.Contracts
     Task<ViewModelQuestionListing> GetAllQuestions(Pager pagination);
     Task<int> SaveQuestion(Questions question, IFormFile File);
     Task<int> DeleteQuestion(int questionId, int deletedBy);
-     Task<ViewModelUserQuestionListing> GetAllUsersQuestions(Pager pagination, int questionId);
-   Task<int> AssignQestions(List<QuestionsAssignment> question, int userId);
-
 
     }
 }

@@ -40,18 +40,6 @@
             <span class="d-none d-md-block d-lg-block">Questions</span>
         </a>
     </li>
-    <li class="nav-item" *ngIf="checkUserRole(sideMenu.QuestionsAssignment)">
-      <a routerLink="/questions-assignment"  class="nav-link" [ngClass]="CurrentPage == 3 ? 'active': ''">
-          <i class="ni ni-tv-2 text-primary"></i>
-          <span class="d-none d-md-block d-lg-block">Questions Assignment</span>
-      </a>
-  </li>
-  <li class="nav-item" *ngIf="checkUserRole(sideMenu.Quiz)">
-    <a routerLink="/quiz"  class="nav-link" [ngClass]="CurrentPage == 4 ? 'active': ''">
-        <i class="ni ni-tv-2 text-primary"></i>
-        <span class="d-none d-md-block d-lg-block">Quiz</span>
-    </a>
-</li>
 
 <li class="nav-item" *ngIf="checkUserRole(sideMenu.Categories)">
   <a routerLink="/categories"  class="nav-link" [ngClass]="CurrentPage == 5 ? 'active': ''">

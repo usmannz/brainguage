@@ -23,14 +23,3 @@ export class Questions {
 }
 
 
-
-export class QuestionsAssignment {
-    public constructor(init?: Partial<QuestionsAssignment>) {
-        Object.assign(this, init);
-    }
-
-    id?: number; // Make id optional
-    usersId: number;
-    questionsId: number;
-}
-
