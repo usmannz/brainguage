@@ -22,7 +22,7 @@
     <div class="form-row">
     <div class="form-group col-md-4">
       <div class="checkbox mb-3">
-        <label class="custom-container"> Mock up
+        <label class="custom-container"> Mock up Test
             <input formControlName="isMockExam" type="checkbox" value="remember-me">
             <span class="custom-checkmark"></span>
         </label>
@@ -30,7 +30,7 @@
     </div>
     <div class="form-group col-md-4">
       <div class="checkbox mb-3">
-        <label class="custom-container"> Demo
+        <label class="custom-container"> Demo Test
             <input formControlName="isDemo" type="checkbox" value="remember-me">
             <span class="custom-checkmark"></span>
         </label>
@@ -38,7 +38,7 @@
     </div>
     <div class="form-group col-md-4">
       <div class="checkbox mb-3">
-        <label class="custom-container"> Prep
+        <label class="custom-container"> Preparatory Test
             <input formControlName="isPrepExam" type="checkbox" value="remember-me">
             <span class="custom-checkmark"></span>
         </label>
@@ -78,7 +78,7 @@
     </div>
     <div class="form-group">
       <label for="option1"
-        [ngClass]="{'error': submitted && myQuestionForm.option1.errors}">option 1<sup>*</sup></label>
+        [ngClass]="{'error': submitted && myQuestionForm.option1.errors}">Option A<sup>*</sup></label>
       <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
         id="option1" formControlName="option1" #option1 placeholder="Enter option 1"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -87,12 +87,12 @@
           {{option1.value.length}} / 5000 characters left.
         </label>
       <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option1.errors?.required">
-        Option 1 is required
+        Option A is required
       </div>
     </div>
     <div class="form-group">
       <label for="option2"
-        [ngClass]="{'error': submitted && myQuestionForm.option2.errors}">option 2<sup>*</sup></label>
+        [ngClass]="{'error': submitted && myQuestionForm.option2.errors}">Option B<sup>*</sup></label>
       <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
         id="option2" formControlName="option2" #option2 placeholder="Enter option 2"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -101,12 +101,12 @@
           {{option2.value.length}} / 5000 characters left.
         </label>
       <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option2.errors?.required">
-        Option 2 is required
+        Option B is required
       </div>
     </div>
     <div class="form-group">
       <label for="option3"
-        [ngClass]="{'error': submitted && myQuestionForm.option3.errors}">option 3<sup>*</sup></label>
+        [ngClass]="{'error': submitted && myQuestionForm.option3.errors}">Option C<sup>*</sup></label>
       <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
         id="option3" formControlName="option3" #option3 placeholder="Enter option 3"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -115,12 +115,12 @@
           {{option3.value.length}} / 5000 characters left.
         </label>
       <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option3.errors?.required">
-        Option 3 is required
+        Option C is required
       </div>
     </div>
     <div class="form-group">
       <label for="option4"
-        [ngClass]="{'error': submitted && myQuestionForm.option4.errors}">option 4<sup>*</sup></label>
+        [ngClass]="{'error': submitted && myQuestionForm.option4.errors}">Option D<sup>*</sup></label>
       <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
         id="option4" formControlName="option4" #option4 placeholder="Enter option 4"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -129,12 +129,12 @@
           {{option4.value.length}} / 5000 characters left.
         </label>
       <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option4.errors?.required">
-        Option 4 is required
+        Option D is required
       </div>
     </div>
     <div class="form-group">
       <label for="option5"
-        [ngClass]="{'error': submitted && myQuestionForm.option5.errors}">option 5<sup>*</sup></label>
+        [ngClass]="{'error': submitted && myQuestionForm.option5.errors}">Option E<sup>*</sup></label>
       <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
         id="option5" formControlName="option5" #option5 placeholder="Enter option 5"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
@@ -143,7 +143,7 @@
           {{option5.value.length}} / 5000 characters left.
         </label>
       <div class="invalid-feedback" *ngIf="submitted && myQuestionForm.option5.errors?.required">
-        Option 5 is required
+        Option E is required
       </div>
     </div>
     <div class="form-group">
@@ -153,15 +153,15 @@
       </label>
     
       <div>
-        <label for="option1">Option 1: </label>
+        <label for="option1" class="padding-right-7">Option A: </label>
         <input type="radio" formControlName="correctAnswer" [value]="1" />
-        <label for="option2">Option 2: </label>
+        <label for="option2" class="padding-right-7">Option B: </label>
         <input type="radio" formControlName="correctAnswer" [value]="2" />
-        <label for="option3">Option 3: </label>
+        <label for="option3" class="padding-right-7">Option C: </label>
         <input type="radio" formControlName="correctAnswer" [value]="3" />
-        <label for="option4">Option 4: </label>
+        <label for="option4" class="padding-right-7">Option D: </label>
         <input type="radio" formControlName="correctAnswer" [value]="4" />
-        <label for="option5">Option 5: </label>
+        <label for="option5" class="padding-right-7">Option E: </label>
         <input type="radio" formControlName="correctAnswer" [value]="5" />
       </div>
     </div>
