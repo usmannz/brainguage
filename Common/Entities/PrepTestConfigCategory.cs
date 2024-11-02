@@ -1,4 +1,4 @@
-﻿using SampleProject.Common.Contracts;
+﻿using FRCSPreparationPortal.Common.Contracts;
 using ServiceStack;
 using StackExchange.Redis;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleProject.Common.Entities
+namespace FRCSPreparationPortal.Common.Entities
 {
     public class PrepTestConfigCategory : IEntity
     {

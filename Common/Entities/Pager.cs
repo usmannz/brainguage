@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SampleProject.Common.Entities
+namespace FRCSPreparationPortal.Common.Entities
 {
     public class Pager
     {

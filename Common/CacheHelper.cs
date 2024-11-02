@@ -1,13 +1,13 @@
 ﻿using Common;
-using SampleProject.Common.Contracts;
-using SampleProject.Common.Entities;
+using FRCSPreparationPortal.Common.Contracts;
+using FRCSPreparationPortal.Common.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
     public class CacheHelper
     {

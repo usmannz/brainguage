@@ -5,9 +5,9 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
-using SampleProject.Common.Entities;
+using FRCSPreparationPortal.Common.Entities;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
 
     /// <summary>

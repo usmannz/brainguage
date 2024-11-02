@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ServiceStack.Caching;
 using StackExchange.Redis.Extensions.Core;
 
-namespace SampleProject.Common.Contracts
+namespace FRCSPreparationPortal.Common.Contracts
 {
     public interface ICache
     {

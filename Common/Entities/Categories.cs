@@ -1,4 +1,4 @@
-﻿using SampleProject.Common.Contracts;
+﻿using FRCSPreparationPortal.Common.Contracts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +7,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleProject.Common.Entities
+namespace FRCSPreparationPortal.Common.Entities
 {
 public class Categories : IEntity
     {

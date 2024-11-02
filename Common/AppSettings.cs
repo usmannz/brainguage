@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
     public static class AppSettings
     {

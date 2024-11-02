@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
-using SampleProject.Common.Contracts;
+using FRCSPreparationPortal.Common.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using StackExchange.Redis.Extensions.Core;
 using ServiceStack.Caching;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
     public class MemoryCacheClient : ICache
     {

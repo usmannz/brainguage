@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SampleProject.Common.Contracts;
+using FRCSPreparationPortal.Common.Contracts;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using StackExchange.Redis.Extensions.Core;
 using ServiceStack.Caching;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
     public class RedisCacheClient : ICache
     {

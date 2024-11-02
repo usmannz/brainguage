@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
     [Serializable]
     public enum BuildMode

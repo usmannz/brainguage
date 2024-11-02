@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
     public static class OrderByHelper
     {

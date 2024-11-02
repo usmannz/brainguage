@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleProject.Common.Models
+namespace FRCSPreparationPortal.Common.Models
 {
     public class ApiResponse<T>
     {

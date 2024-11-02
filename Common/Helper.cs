@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
     public static class Helper
     {

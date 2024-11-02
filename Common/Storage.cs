@@ -9,10 +9,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using SampleProject.Common.Contracts;
+using FRCSPreparationPortal.Common.Contracts;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace SampleProject.Common
+namespace FRCSPreparationPortal.Common
 {
      public static class Storage
     {

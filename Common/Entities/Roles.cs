@@ -1,4 +1,4 @@
-﻿using SampleProject.Common.Contracts;
+﻿using FRCSPreparationPortal.Common.Contracts;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleProject.Common.Entities
+namespace FRCSPreparationPortal.Common.Entities
 {
     public class Roles
     {

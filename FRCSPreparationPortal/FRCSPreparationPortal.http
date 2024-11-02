@@ -1,0 +1,6 @@
+@FRCSPreparationPortal_HostAddress = http://localhost:5200
+
+GET {{FRCSPreparationPortal_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
