@@ -53,18 +53,20 @@ export class CategoryEditComponent extends BasePopupComponent  implements OnInit
 
 insertCategory(category: Categories) {
   this.isCategoryInProgress = true;
-  this._categoryService.insertCategory(category).subscribe((data: number) => {
-    if(data == -1)
+  this._categoryService.insertCategory(category).subscribe((d: any) => {
+    if(d?.data != null && d.status.code ==200)
     {
-      this.toastService.showError("Category should be unique.", "Category");
-
+      if(d?.data == -1)
+        {
+          this.toastService.showError("Category name should be unique.", "Category");
+    
+        }
+        else
+        {
+          this.toastService.showSuccess("Category is saved successfully.", "Category");
+    
+        }
     }
-    else
-    {
-      this.toastService.showSuccess("Category is saved successfully.", "Category");
-
-    }
-   
     this._dialogRef.close(true);
   
     this.isCategoryInProgress = false;
