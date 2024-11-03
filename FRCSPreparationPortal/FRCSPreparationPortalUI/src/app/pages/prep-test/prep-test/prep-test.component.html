@@ -114,6 +114,9 @@
               <div *ngFor="let question of listQuiz; let index = index">
                 <div class="result-question"style="margin-bottom: 10px;" >
                   <h5 class="text-white mb-0">{{index + 1}}. {{question.question}}</h5>
+                  <div *ngIf="question.pictureWebPath">
+                    <img [src]="question.pictureWebPath" alt="Current Question Image" style="max-width: 400px; max-height: 400px;" />
+                  </div>
                   <div class="row">
                     <div class="col-6" >
                       <div class="option"  style="margin-left: 30px; margin-top: 10px;" >
@@ -134,7 +137,7 @@
                             {{ option }}
                           </label>
                         </div>
-
+                        <h5 style="margin-top: 10px;" class="text-white mb-0">{{question.description}}</h5>
                     <!-- <textarea style="height: 130px !important;" type="text" class="form-control form-control-textarea"
                     id="answer" [(ngModel)]="question.answer"  #answer placeholder="Enter your answer"
                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"

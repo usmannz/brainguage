@@ -206,8 +206,22 @@ var existingPrepTestIdentifier = await _context.PrepTest
             }
             else if (config.QuestionCriteria == "wrong")
             {
-                questionsQuery = questionsQuery.Where(q => _context.PrepTest
-                    .Any(pt => pt.QuestionsId == q.Id && pt.UsersId == userId && pt.Answer != q.CorrectAnswer && pt.IsDeleted == false));
+                // Get the latest attempts for each question
+                var latestAnswers = _context.PrepTest
+                    .Where(pt => pt.UsersId == userId && pt.IsDeleted == false && pt.IsSubmitted == true)
+                    .GroupBy(pt => pt.QuestionsId)
+                    .Select(g => new
+                    {
+                        QuestionsId = g.Key,
+                        LatestAnswer = g.OrderByDescending(pt => pt.UpdateStamp).FirstOrDefault()
+                    });
+
+                questionsQuery = questionsQuery.Where(q => latestAnswers
+                    .Any(latest => latest.QuestionsId == q.Id && latest.LatestAnswer.Answer != q.CorrectAnswer));
+
+
+                // questionsQuery = questionsQuery.Where(q => _context.PrepTest
+                //     .Any(pt => pt.QuestionsId == q.Id && pt.UsersId == userId && pt.Answer != q.CorrectAnswer && pt.IsDeleted == false));
             }
 
             // Step 4: Select random questions up to `TotalQuestions`
@@ -317,6 +331,7 @@ var existingPrepTestData = await _context.PrepTest
             PrepIdentifier = combined.uq.PrepIdentifier,  // PrepTestIdentifier
             Answer = combined.uq.Answer,
             Description = combined.q.Description,
+            CorrectAnswer = combined.q.CorrectAnswer,
             Option1 = combined.q.Option1,
             Option2 = combined.q.Option2,
             Option3 = combined.q.Option3,
