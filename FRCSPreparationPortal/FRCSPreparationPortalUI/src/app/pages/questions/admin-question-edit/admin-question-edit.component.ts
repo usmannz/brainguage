@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Questions } from 'src/app/entities/questions';
+import { Helper } from 'src/app/helpers/helper';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ContextService } from 'src/app/services/context.service';
 import { QuestionService } from 'src/app/services/question.service';
@@ -37,7 +38,7 @@ export class AdminQuestionEditComponent extends BasePopupComponent  implements O
     categoriesId: [0, [Validators.required, Validators.min(1)]],
     file: [],
     correctAnswer: [1, [Validators.required]]
-  });
+  }, { validators: Helper.atLeastOneCheckedValidator(['isMockExam', 'isDemo', 'isPrepExam']) });
 
 
   constructor(

@@ -19,8 +19,8 @@
         Question is required
       </div>
     </div>
-    <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class=" form-group form-row">
+    <div class=" col-md-4">
       <div class="checkbox mb-3">
         <label class="custom-container"> Mock up Test
             <input formControlName="isMockExam" type="checkbox" value="remember-me">
@@ -28,7 +28,7 @@
         </label>
     </div>
     </div>
-    <div class="form-group col-md-4">
+    <div class=" col-md-4">
       <div class="checkbox mb-3">
         <label class="custom-container"> Demo Test
             <input formControlName="isDemo" type="checkbox" value="remember-me">
@@ -36,7 +36,7 @@
         </label>
     </div>
     </div>
-    <div class="form-group col-md-4">
+    <div class=" col-md-4">
       <div class="checkbox mb-3">
         <label class="custom-container"> Preparatory Test
             <input formControlName="isPrepExam" type="checkbox" value="remember-me">
@@ -44,6 +44,9 @@
         </label>
     </div>
     </div>
+    <div *ngIf="submitted && questionForm.errors?.atLeastOneRequired" class="invalid-feedback">
+      At least one option must be selected!
+    </div>  
   </div>
     <div class="form-group">
       <label for="categoriesId"

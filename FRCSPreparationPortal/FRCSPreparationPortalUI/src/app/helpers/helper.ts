@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
 import * as moment from 'moment';
 import { SideMenu } from '../shared/enums';
 
@@ -161,5 +161,13 @@ export class Helper {
       .map(word => word.charAt(0).toLowerCase() + word.slice(1))
       .join('-');
   }
+
+  static atLeastOneCheckedValidator(controls: string[]): ValidatorFn {
+    return (formGroup: AbstractControl): { [key: string]: boolean } | null => {
+      const isAtLeastOneChecked = controls.some(control => formGroup.get(control)?.value);
+      return isAtLeastOneChecked ? null : { atLeastOneRequired: true };
+    };
+  }
+  
     
 }
