@@ -24,6 +24,7 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
   quizSubmitted = true;
   prepTestConfigId = 0;
   quizName: string;
+  timeLeft : any;
   config: QuizConfig = {
     allowBack: true,
     allowReview: false,
@@ -84,20 +85,25 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
   // //   this.duration = this.parseTime(this.config.duration);
   // //   this.mode = "quiz";
   // }
-
   tick() {
-    if(this.listQuiz.length > 0 && !this.quizSubmitted)
-    {
+    if (this.listQuiz.length > 0 && !this.quizSubmitted) {
       const now = new Date();
-      const diff = (now.getTime() - this.startTime.getTime()) / 1000;
-      if (diff >= this.config.duration) {
-        this.onSubmit();
+      
+      // Calculate the elapsed time in seconds
+      const totalSecondsPassed = Math.floor((now.getTime() - this.startTime.getTime()) / 1000);
+      const elapsedTimeInSeconds = totalSecondsPassed + (this.listQuiz[0].timeBox * 60 - this.listQuiz[0].timeLeft);
+      this.timeLeft = elapsedTimeInSeconds;
+      // Update ellapsedTime using the calculated elapsed time
+      this.ellapsedTime = this.parseTime(elapsedTimeInSeconds);
+      console.log("Prep Test Timer in progress")
+
+      // Check if the quiz duration has exceeded
+      if (elapsedTimeInSeconds >= this.listQuiz[0].timeBox * 60) {
+        this.onSubmit(true);
       }
-      this.ellapsedTime = this.parseTime(diff);
-  
     }
   }
-
+  
   parseTime(totalSeconds: number) {
     let mins: string | number = Math.floor(totalSeconds / 60);
     let secs: string | number = Math.round(totalSeconds % 60);
@@ -105,7 +111,6 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
     secs = (secs < 10 ? "0" : "") + secs;
     return `${mins}:${secs}`;
   }
-
   get filteredQuestions() {
     return this.listQuiz
       ? this.listQuiz.slice(
@@ -135,7 +140,6 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
   }
 
   isAnswered(question: any) {
-    console.log(question)
     return  question.answer > 0 ? "Answered" : "Not Answered";
   }
 
@@ -145,17 +149,28 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
       : "wrong";
   }
 
-  onSubmit() {
-    console.log(this.listQuiz,"submit")
+  onSubmit(isSubmitted:boolean) {
+    console.log("Prep Test Timer call")
+    this.stopTimer();
     this.isFilterInProgress = true;
-    this._prepTestService.savePrepTestResponse(this.listQuiz).subscribe((data: number) => {
+    var timeLeft = ((this.listQuiz[0].timeBox * 60 ) - this.timeLeft)
+    this._prepTestService.savePrepTestResponse(this.listQuiz,isSubmitted,timeLeft).subscribe((data: number) => {
       if(data == -1)
       {
         this.toastService.showError("Question should be unique.", "Question");
       }
       else
       {
-        this.toastService.showSuccess("Test has been submitted successfully.", "Question");
+        if(isSubmitted)
+        {
+          this.toastService.showSuccess("Test has been submitted successfully.", "Question");
+          this.mode = "result";
+        }
+        else
+        {
+          this.toastService.showSuccess("Test has been saved successfully.", "Question");
+          this._router.navigate(['/prep-test-listing'])
+        }
         this.quizSubmitted = true;
       }
       // this.router.navigate(['questions']);
@@ -172,16 +187,13 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
     // );
 
     // Post your data to the server here. answers contains the questionId and the users' answer.
-    this.mode = "result";
   }
   @HostListener("window:focus", ["$event"])
   onFocus(event: any): void {
-    //console.log("On Focus");
   }
 
   @HostListener("window:blur", ["$event"])
   onBlur(event: any): void {
-    console.log("On Blur");
   }
   @HostListener("window:beforeunload", ["$event"])
   unloadNotification($event: any) {}
@@ -191,17 +203,26 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
       if(d?.data != null && d.status.code == 200)
       {
         this.listQuiz = d.data;
-        this.pager.count = this.listQuiz.length;
-        this.quizSubmitted = false;
     this.startTime = new Date();
     this.ellapsedTime = "00:00";
 
     this.config.duration = this.listQuiz[0]?.timeBox * 60;
     this.duration = this.parseTime(this.config.duration);
-    this.mode = "quiz"; 
-    this.timer = setInterval(() => {
-      this.tick();
-    }, 1000);
+    if(this.listQuiz[0]?.isSubmitted)
+    {
+      this.mode = "result"; 
+      this.quizSubmitted = true;
+    }
+    else
+    {
+      this.mode = "quiz"; 
+      this.pager.count = this.listQuiz.length;
+      this.quizSubmitted = false;
+      this.timer = setInterval(() => {
+        this.tick();
+      }, 1000);
+    }
+   
           }
       this.isFilterInProgress = false;
     });
@@ -236,5 +257,12 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
   this.listQuiz =[];
   this._router.navigate(['/prep-test-listing'])
 
+}
+
+stopTimer() {
+  if (this.timer) {
+    clearInterval(this.timer);
+    this.timer = null; // Optional: set to null for better memory management
+  }
 }
 }

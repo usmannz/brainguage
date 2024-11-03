@@ -85,6 +85,7 @@ export class MockTestComponent extends BaseComponent  implements OnInit {
     {
       const now = new Date();
       const diff = (now.getTime() - this.startTime.getTime()) / 1000;
+      console.log("Prep Test Timer in progress")
       if (diff >= this.config.duration) {
         this.onSubmit();
       }
@@ -130,7 +131,6 @@ export class MockTestComponent extends BaseComponent  implements OnInit {
   }
 
   isAnswered(question: any) {
-    console.log(question)
     return  question.answer > 0 ? "Answered" : "Not Answered";
   }
 
@@ -141,8 +141,10 @@ export class MockTestComponent extends BaseComponent  implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.listQuiz,"submit")
     this.isFilterInProgress = true;
+    console.log("Prep Test Timer call")
+    this.stopTimer();
+
     this.mockTestService.saveMockTestResponse(this.listQuiz).subscribe((data: number) => {
       if(data == -1)
       {
@@ -171,12 +173,10 @@ export class MockTestComponent extends BaseComponent  implements OnInit {
   }
   @HostListener("window:focus", ["$event"])
   onFocus(event: any): void {
-    //console.log("On Focus");
   }
 
   @HostListener("window:blur", ["$event"])
   onBlur(event: any): void {
-    console.log("On Blur");
   }
   @HostListener("window:beforeunload", ["$event"])
   unloadNotification($event: any) {}
@@ -230,5 +230,11 @@ export class MockTestComponent extends BaseComponent  implements OnInit {
   closeWindow ()
 {
   this.listQuiz =[];
+}
+stopTimer() {
+  if (this.timer) {
+    clearInterval(this.timer);
+    this.timer = null; // Optional: set to null for better memory management
+  }
 }
 }

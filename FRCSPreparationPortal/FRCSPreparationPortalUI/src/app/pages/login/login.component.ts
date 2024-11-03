@@ -84,7 +84,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
                   this._cookieService.remove('emailAddress'),
                   this._cookieService.remove('remember')
               }
-              console.log(this._returnUrl)
               if(this._returnUrl == "/")
               {
                 if(this.isAdminRole())

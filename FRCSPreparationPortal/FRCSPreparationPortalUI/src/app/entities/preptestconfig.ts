@@ -8,6 +8,8 @@ export class PrepTestConfig {
     id?: number; // Make id optional
     name: string;
     timeBox: number;
+    timeLeft: number;
+    isSubmitted: boolean;
     totalQuestions: number;
     // unAttemptQuestions: boolean;
     // wrongAnswers: boolean;
@@ -26,6 +28,8 @@ export class SavePrepTestConfig {
     id?: number; // Make id optional
     name: string;
     timeBox: number;
+    timeLeft: number;
+    isSubmitted: boolean;
     totalQuestions: number;
     // unAttemptQuestions: boolean;
     // wrongAnswers: boolean;

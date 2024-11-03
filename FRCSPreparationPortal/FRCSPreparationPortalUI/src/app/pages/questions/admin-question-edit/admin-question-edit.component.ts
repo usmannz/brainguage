@@ -65,7 +65,6 @@ export class AdminQuestionEditComponent extends BasePopupComponent  implements O
       this.isEdit = true;
       this.questionForm.patchValue(this._data.question);
       this.imageUrl =this._data.question?.pictureWebPath;
-      console.log(this._data.question)
     }
   }
 

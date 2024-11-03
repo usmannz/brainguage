@@ -25,7 +25,6 @@ location: Location,  private element: ElementRef) {
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
    this.username = this._contextService.CurrentUserName;
-   console.log(this.username)
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -34,7 +33,6 @@ location: Location,  private element: ElementRef) {
     // if(titlee.charAt(0) === '#' || titlee.charAt(0) === '/'){
     //     titlee = titlee.slice( 1 );
     // }
-    console.log(titlee)
 
     for(var item = 0; item < this.listTitles.length; item++){
         if(this.listTitles[item].path === titlee){

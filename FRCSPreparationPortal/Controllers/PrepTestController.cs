@@ -32,11 +32,11 @@ namespace FRCSPreparationPortal.Controllers
             return Ok(await _prepTestService.GeneratePrepTest(userId));
         }
 
-         [Authorize(Roles = "Admin,User"),HttpPost("SavePrepTestResponse")]        
-        public async Task<IActionResult> SavePrepTestResponse([FromBody] List<ViewPrepTestListing> response)
+         [Authorize(Roles = "Admin,User"),HttpPost("SavePrepTestResponse/{isSubmitted}/{timeLeft}")]        
+        public async Task<IActionResult> SavePrepTestResponse([FromBody] List<ViewPrepTestListing> response,bool isSubmitted,int timeLeft)
         {
             
-            return Ok(await _prepTestService.SavePrepTestResponse(response,UserId));
+            return Ok(await _prepTestService.SavePrepTestResponse(response, isSubmitted, timeLeft,UserId));
         }
 
           [Authorize(Roles = "User"),HttpPost("GetAllPrepTests")] 

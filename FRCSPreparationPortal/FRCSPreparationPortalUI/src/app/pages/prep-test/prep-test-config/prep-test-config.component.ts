@@ -117,9 +117,7 @@ getAllDropDownCategories() {
 
 toggleSelectAll(event: Event) {
   event.stopPropagation(); // Prevent the select-all click from closing the dropdown
-  console.log(this.allSelected,"Before")
   this.allSelected = !this.allSelected;
-  console.log(this.allSelected,"after")
 
   if (this.allSelected) {
     // Select all categories
@@ -138,7 +136,6 @@ toggleSelectAll(event: Event) {
 }
 
 onCategorySelectionChange() {
-  console.log("option changed")
   const selectedCategories = this.prepTestConfigForm.controls.categories.value || [];
   this.allSelected = selectedCategories.length === this.listCategories.length;
 }

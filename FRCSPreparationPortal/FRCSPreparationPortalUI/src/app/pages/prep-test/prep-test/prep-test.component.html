@@ -165,7 +165,9 @@
             <div *ngIf="mode!='result'">
               <button class="btn btn-warning" (click)="mode = 'quiz'">Test</button>
               <button class="btn btn-info" (click)="mode = 'review'">Review</button>
-              <button class="btn btn-primary" (click)="onSubmit();">Submit Test</button>
+              <button class="btn btn-primary" (click)="onSubmit(true);">Submit Test</button>
+              <button class="btn btn-primary" (click)="onSubmit(false);">Save Test</button>
+
             </div>
           </div>
         </div>

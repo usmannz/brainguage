@@ -56,7 +56,8 @@ namespace FRCSPreparationPortal.Common.Entities
         public int? CreatedBy { get; set; }
         public int? UpdatedBy { get; set; }
         public int TimeBox { get; set; } = 0;
-
-        
+        public bool ResultEnd { get; set; } = false;
+        public bool IsSubmitted { get; set; } = false;  // default to false
+        public int TimeLeft { get; set; } = 0;
     }
 }

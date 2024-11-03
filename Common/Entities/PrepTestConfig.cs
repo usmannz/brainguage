@@ -15,6 +15,11 @@ namespace FRCSPreparationPortal.Common.Entities
         public int Id { get; set; }
         public string Name { get; set; } =  string.Empty;
         public int TimeBox { get; set; } = 0;
+        public int TimeLeft { get; set; } = 0;
+        public bool IsSubmitted { get; set; } = false;  // default to false
+        public bool IsSaved { get; set; } = false;  // default to false
+        public bool InProgress { get; set; } = false;  // default to false
+        public bool IsStarted { get; set; } = false;  // default to false
         public int TotalQuestions { get; set; } =0;
         //public bool UnAttemptQuestions { get; set; } = false;
         //public bool WrongAnswers { get; set; } = false;
@@ -23,6 +28,7 @@ namespace FRCSPreparationPortal.Common.Entities
         public bool ResultEnd { get; set; } = false;
         public bool IsDeleted { get; set; }
         public DateTime CreateStamp { get; set; }
+        public DateTime LastAttemptStamp { get; set; }
         public DateTime? UpdateStamp { get; set; }
         public DateTime? DeleteStamp { get; set; }
         public int? CreatedBy { get; set; }
@@ -45,6 +51,8 @@ namespace FRCSPreparationPortal.Common.Entities
         public Guid PrepIdentifier { get; set; }
         public List<int> Categories { get; set; } = new List<int>();
         public int TimeBox { get; set; } = 0;
+        public int TimeLeft { get; set; } = 0;
+        public bool IsSubmitted { get; set; } = false;  // default to false
         public int TotalQuestions { get; set; } =0;
         //public bool UnAttemptQuestions { get; set; } = false;
         //public bool WrongAnswers { get; set; } = false;

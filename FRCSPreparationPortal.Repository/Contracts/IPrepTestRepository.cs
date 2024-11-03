@@ -12,7 +12,7 @@ namespace FRCSPreparationPortal.Repository.Contracts
     public interface IPrepTestRepository : IRepository<PrepTest>
     {
     Task<List<ViewPrepTestListing>> GeneratePrepTest(int userId);
-    Task<int> SavePrepTestResponse(List<ViewPrepTestListing> response,int userId);
+    Task<int> SavePrepTestResponse(List<ViewPrepTestListing> response, bool isSubmitted, int timeLeft, int userId);
     Task<ViewModelPrepTestConfigListing> GetAllPrepTests(Pager pagination);
     Task<int> SavePrepTestConfig(SavePrepTestConfig config,int userId);
     Task<List<ViewPrepTestListing>> GetPrepTestById(int prepTestId, int userId);

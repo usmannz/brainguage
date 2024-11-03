@@ -53,16 +53,11 @@ export class CategoriesListingComponent extends BaseComponent  implements OnInit
   }
 
   getPageData() {
-    console.log("ca")
       this._categoryService.getAllCategories(this.pagination).subscribe((d: any) => {
-        console.log(d.data)
-        console.log(d.status.code)
         if(d?.data != null && d.status.code ==200)
         {
           this.listCategories = d.data;
           this.count = this.listCategories.count;
-          console.log(this.listCategories,"q")
-          console.log(this.count)
     
         }
         this.isFilterInProgress = false;

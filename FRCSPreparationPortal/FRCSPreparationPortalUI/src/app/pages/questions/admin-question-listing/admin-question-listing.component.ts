@@ -53,17 +53,12 @@ export class AdminQuestionsListingComponent extends BaseComponent  implements On
   }
 
   getPageData() {
-    console.log(this.isAdmin,"ASD")
  
       this._questionService.getAllQuestions(this.pagination).subscribe((d: any) => {
-        console.log(d.data)
-        console.log(d.status.code)
         if(d?.data != null && d.status.code ==200)
         {
           this.listQuestions = d.data;
           this.count = this.listQuestions.count;
-          console.log(this.listQuestions,"q")
-          console.log(this.count)
     
         }
         this.isFilterInProgress = false;

@@ -49,11 +49,11 @@ namespace FRCSPreparationPortal.Service
 
         }   
 
-    public async Task<ApiResponse<int>> SavePrepTestResponse(List<ViewPrepTestListing> response, int userId)
+    public async Task<ApiResponse<int>> SavePrepTestResponse(List<ViewPrepTestListing> response, bool isSubmitted, int timeLeft, int userId)
         {
              try
             {
-            var licenseid = await _prepTestRepository.SavePrepTestResponse(response,userId);
+            var licenseid = await _prepTestRepository.SavePrepTestResponse(response,isSubmitted,timeLeft,userId);
               return new ApiResponse<int>
                 {
                     Status = new ApiResponseStatus { Code = 200, Message = "Success" },

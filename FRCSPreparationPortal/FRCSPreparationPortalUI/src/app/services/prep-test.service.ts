@@ -23,8 +23,8 @@ export class PrepTestService {
         return this._http.post<number>(`${Settings.apiBase}preptest/SavePrepTestConfig`, config)
     }
 
-    savePrepTestResponse(ans: any): Observable<number> {
-        return this._http.post<number>(`${Settings.apiBase}preptest/savePrepTestResponse`, ans)
+    savePrepTestResponse(ans: any,isSubmitted,timeLeft): Observable<number> {
+        return this._http.post<number>(`${Settings.apiBase}preptest/savePrepTestResponse/${isSubmitted}/${timeLeft}`, ans)
     }
 
     getPrepTestById(PrepTestConfigId): Observable<any> {

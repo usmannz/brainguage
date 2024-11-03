@@ -54,14 +54,11 @@ export class PrepTestListingComponent extends BaseComponent  implements OnInit {
   }
 
   getPageData() {
-    console.log("ca")
       this._prepTestService.getAllPrepTests(this.pagination).subscribe((d: any) => {
         if(d?.data != null && d.status.code ==200)
         {
           this.listPrepTest = d.data;
           this.count = this.listPrepTest.count;
-          console.log(this.listPrepTest,"q")
-          console.log(this.count)
     
         }
         this.isFilterInProgress = false;

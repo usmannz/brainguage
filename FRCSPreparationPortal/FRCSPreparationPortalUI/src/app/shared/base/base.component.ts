@@ -65,7 +65,6 @@ export class BaseComponent {
             return;
         }
         let roleCheck = this.contextService._userRoles.filter(item => this._pageAccessLevel.some(o2 => item.roleId === o2));
-         console.log(roleCheck,"rolechevk",roleCheck.length)
          if(roleCheck.length == 0)
           {
           this._router.navigate(['/login'])

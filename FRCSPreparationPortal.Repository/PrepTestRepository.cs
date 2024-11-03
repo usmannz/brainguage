@@ -114,7 +114,7 @@ var existingPrepTestIdentifier = await _context.PrepTest
             }
 
 
-              public async Task<int> SavePrepTestResponse(List<ViewPrepTestListing> response,int userId)
+              public async Task<int> SavePrepTestResponse(List<ViewPrepTestListing> response, bool isSubmitted, int timeLeft, int userId)
         {
              // Fetch all relevant UserPrepTest records in one query
     var userPrepTestList = await _context.PrepTest
@@ -138,7 +138,23 @@ var existingPrepTestIdentifier = await _context.PrepTest
 
     // Save all changes in one call
     await _context.SaveChangesAsync();
-                    return 1;
+
+            var prepTest = _context.PrepTestConfig.AsNoTracking().FirstOrDefault(item => item.PrepIdentifier == response[0].PrepIdentifier && !item.IsDeleted);
+            if (prepTest != null)
+            {
+                prepTest.UpdateStamp = DateTime.UtcNow;
+                prepTest.IsSubmitted = isSubmitted;
+                prepTest.IsSaved = !isSubmitted;
+                prepTest.InProgress = false;
+                prepTest.LastAttemptStamp = DateTime.UtcNow;
+                prepTest.TimeLeft = prepTest.IsSubmitted ? 0 : timeLeft;
+                prepTest.UpdatedBy = userId;
+                _context.PrepTestConfig.Update(prepTest);
+                await _context.SaveChangesAsync();
+
+            }
+
+               return 1;
                
             }
 
@@ -236,6 +252,8 @@ var existingPrepTestIdentifier = await _context.PrepTest
             prepTest.Id = config.Id;
             prepTest.Name = config.Name;
             prepTest.TimeBox = config.TimeBox;
+            prepTest.TimeLeft = config.TimeBox * 60;
+            prepTest.IsSubmitted = false;
             prepTest.TotalQuestions = config.TotalQuestions;
             //prepTest.UnAttemptQuestions = config.UnAttemptQuestions;
             //prepTest.WrongAnswers = config.WrongAnswers;
@@ -312,7 +330,50 @@ var existingPrepTestIdentifier = await _context.PrepTest
 
          public async Task<List<ViewPrepTestListing>> GetPrepTestById(int prepTestConfigId, int userId)
         {
+            var prepTest = _context.PrepTestConfig.AsNoTracking().FirstOrDefault(item => item.Id == prepTestConfigId && !item.IsDeleted);
+                
+            if (prepTest != null)
+            {
+                 if(!prepTest.IsStarted)
+                {
+                    prepTest.IsStarted = true;
+                    prepTest.InProgress = true;
+                    prepTest.UpdateStamp = DateTime.UtcNow;
+                    prepTest.LastAttemptStamp = DateTime.UtcNow;
+                    prepTest.UpdatedBy = userId;
+                   _context.PrepTestConfig.Update(prepTest);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    DateTime now = DateTime.UtcNow;
+                    DateTime lastAttempt = prepTest.LastAttemptStamp; // Assuming this is a DateTime
+                    int secondsDifference = (int)Math.Round((now - lastAttempt).TotalSeconds);
 
+                if(prepTest.InProgress)
+                {
+                prepTest.TimeLeft =prepTest.TimeLeft - secondsDifference;
+                prepTest.UpdateStamp = DateTime.UtcNow;
+                prepTest.UpdatedBy = userId;
+                 prepTest.LastAttemptStamp = DateTime.UtcNow;
+                _context.PrepTestConfig.Update(prepTest);
+                await _context.SaveChangesAsync();
+                }  
+                else
+                {
+                 prepTest.UpdateStamp = DateTime.UtcNow;
+                 prepTest.InProgress = true;
+                 prepTest.UpdatedBy = userId;
+                 prepTest.LastAttemptStamp = DateTime.UtcNow;
+                 _context.PrepTestConfig.Update(prepTest);
+                 await _context.SaveChangesAsync();
+
+
+                    }
+                }
+                
+
+            }
 
 var existingPrepTestData = await _context.PrepTest
     .Where(uq => uq.PrepTestConfigId == prepTestConfigId && uq.UsersId == userId && !uq.IsDeleted)
@@ -338,7 +399,10 @@ var existingPrepTestData = await _context.PrepTest
             Option4 = combined.q.Option4,
             Option5 = combined.q.Option5,
             TimeBox = ptc.TimeBox,  // TimeBox from PrepTestConfig
+            TimeLeft = ptc.TimeLeft,  // TimeBox from PrepTestConfig
+            IsSubmitted = ptc.IsSubmitted,  // TimeBox from PrepTestConfig
             PictureUrl = combined.q.PictureUrl,
+            ResultEnd = ptc.ResultEnd,
         })
     .ToListAsync();
 
