@@ -108,7 +108,7 @@
               </div>
             </div>
             <div class="result" *ngIf="mode=='result'">
-              <h2 class="text-white mb-0">Quiz Result</h2>
+              <h2 class="text-white mb-0">Test Result</h2>
               <div *ngFor="let question of listQuiz; let index = index">
                 <div class="result-question"style="margin-bottom: 10px;" >
                   <h5 class="text-white mb-0">{{index + 1}}. {{question.question}}</h5>
@@ -161,9 +161,9 @@
             </div>
             <hr />
             <div *ngIf="mode!='result'">
-              <button class="btn btn-warning" (click)="mode = 'quiz'">Quiz</button>
+              <button class="btn btn-warning" (click)="mode = 'quiz'">Test</button>
               <button class="btn btn-info" (click)="mode = 'review'">Review</button>
-              <button class="btn btn-primary" (click)="onSubmit();">Submit Quiz</button>
+              <button class="btn btn-primary" (click)="onSubmit();">Submit Test</button>
             </div>
           </div>
         </div>

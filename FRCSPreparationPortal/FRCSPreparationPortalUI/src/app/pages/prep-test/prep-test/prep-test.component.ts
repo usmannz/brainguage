@@ -155,7 +155,7 @@ export class PrepTestComponent extends BaseComponent  implements OnInit {
       }
       else
       {
-        this.toastService.showSuccess("Quiz has been submitted successfully.", "Question");
+        this.toastService.showSuccess("Test has been submitted successfully.", "Question");
         this.quizSubmitted = true;
       }
       // this.router.navigate(['questions']);
