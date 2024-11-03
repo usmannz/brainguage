@@ -3,4 +3,22 @@
     cursor: not-allowed !important;
   }
   
-  
+/* Ensure the disabled state is semi-transparent but the checked state remains clear */
+input[type="radio"]:disabled {
+  cursor: not-allowed;  /* Change cursor to indicate it is not clickable */
+  opacity: 0.5;         /* Semi-transparent */
+  accent-color: #0075ff;
+}
+
+/* Style for checked disabled radio buttons */
+input[type="radio"]:checked:disabled {
+  opacity: 1;           /* Fully opaque when checked and disabled */
+  border: 2px solid darkgray; /* Border to indicate it is selected */
+  accent-color: #0075ff;
+
+}
+
+/* Optional: Style for checked enabled radio buttons */
+input[type="radio"]:checked:not(:disabled) {
+  accent-color: #0075ff;
+}

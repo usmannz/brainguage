@@ -21,6 +21,7 @@ export class PrepTestConfigComponent extends BasePopupComponent  implements OnIn
   public isPrepTestConfigInProgress: boolean = false;
   public isEdit:boolean =false;
   public listCategories: any = [];
+  allSelected = false;
   public prepTestConfigForm = this._formBuilder.group({
     id: [0, [Validators.required]], // Default to 0 or whatever makes sense
     name: ['', [Validators.required, Validators.maxLength(200)]],
@@ -112,6 +113,34 @@ getAllDropDownCategories() {
       this.listCategories = d.data;
     }
   });
+}
+
+toggleSelectAll(event: Event) {
+  event.stopPropagation(); // Prevent the select-all click from closing the dropdown
+  console.log(this.allSelected,"Before")
+  this.allSelected = !this.allSelected;
+  console.log(this.allSelected,"after")
+
+  if (this.allSelected) {
+    // Select all categories
+    const allCategoryIds = this.listCategories.map(category => category.id);
+    // this.prepTestConfigForm.controls.categories.setValue(allCategoryIds);
+    this.prepTestConfigForm.patchValue({
+      categories: allCategoryIds
+  });
+  } else {
+    // Deselect all categories
+    this.prepTestConfigForm.patchValue({
+      categories: null
+  });
+    // this.prepTestConfigForm.controls.categories.setValue(null);
+  }
+}
+
+onCategorySelectionChange() {
+  console.log("option changed")
+  const selectedCategories = this.prepTestConfigForm.controls.categories.value || [];
+  this.allSelected = selectedCategories.length === this.listCategories.length;
 }
 
 }

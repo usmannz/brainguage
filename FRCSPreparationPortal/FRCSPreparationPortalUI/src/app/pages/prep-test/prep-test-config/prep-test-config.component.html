@@ -1,6 +1,6 @@
 
 
-<h1 class="card-header text-white bg-default">Prep Test Configurations</h1>
+<h1 class="card-header text-white bg-default">Preparatory Test Creation</h1>
 
 <div class="custom-form">
   <div class="modal-body modal-center-scroll">
@@ -20,12 +20,16 @@
     </div>
     <div class="form-group">
       <label for="timeBox"
-        [ngClass]="{'error': submitted && myprepTestConfigForm.timeBox.errors}">Time Box<sup>*</sup></label>
+        [ngClass]="{'error': submitted && myprepTestConfigForm.timeBox.errors}">Test Duration<sup>*</sup></label>
         <input type="number" class="form-control" id="timeBox" formControlName="timeBox"
         placeholder="Enter time box" [ngClass]="{ error: submitted && myprepTestConfigForm.timeBox.errors }"/>
       <div class="invalid-feedback" *ngIf="submitted && myprepTestConfigForm.timeBox.errors?.required">
-        Time box is required
+        Test duration is required
       </div>
+      <div class="invalid-feedback" *ngIf="submitted && myprepTestConfigForm.timeBox.errors?.min">
+        Test duration should be greater than 1 minute
+      </div>
+
     </div>
     <div class="form-group">
       <label for="totalQuestions"
@@ -35,12 +39,21 @@
       <div class="invalid-feedback" *ngIf="submitted && myprepTestConfigForm.totalQuestions.errors?.required">
         Total questions is required
       </div>
+      <div class="invalid-feedback" *ngIf="submitted && myprepTestConfigForm.totalQuestions.errors?.min">
+        Total questions count should be greater than 1
+      </div>
     </div>
     <div class="form-group">
       <label for="categories">Categories<sup>*</sup></label>
       <mat-form-field appearance="fill" class="w-100">
         <mat-select formControlName="categories" placeholder="Select categories" multiple>
-          <mat-option *ngFor="let category of listCategories" [value]="category.id">
+          <!-- Select All Option -->
+          <mat-option (click)="toggleSelectAll($event)">
+            {{ allSelected ? 'Deselect All' : 'Select All' }}
+          </mat-option>
+          
+          <!-- Category Options -->
+          <mat-option *ngFor="let category of listCategories" [value]="category.id"  (click)="onCategorySelectionChange()">
             {{ category.name }}
           </mat-option>
         </mat-select>
@@ -49,8 +62,9 @@
         At least one category must be selected
       </div>
     </div>
+    
     <div class="form-group">
-      <label for="categories">Test Criteria<sup>*</sup></label>
+      <label for="categories">Criteria<sup>*</sup></label>
       <mat-form-field appearance="fill" class="w-100">
         <mat-select formControlName="questionCriteria" placeholder="Select Question Criteria">
           <mat-option value="all">All Questions</mat-option>
@@ -58,7 +72,6 @@
           <mat-option value="wrong">Wrong Answers</mat-option>
         </mat-select>
       </mat-form-field>
-      
     </div>
     <div class="form-row">
     <!-- <div class="form-group col-md-3">
@@ -87,7 +100,7 @@
     </div> -->
     <div class="form-group col-md-12">
       <div class="checkbox mb-3">
-        <label class="custom-container"> Result End
+        <label class="custom-container">Check this box if you would like to see your test results displayed after each question. If unchecked, the results will be shown only at the end of the test.
             <input formControlName="resultEnd" type="checkbox" value="remember-me">
             <span class="custom-checkmark"></span>
         </label>

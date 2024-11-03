@@ -69,7 +69,8 @@
                               [name]="'options-' + question.id"
                               [value]="i + 1"
                               [(ngModel)]="question.answer"
-                              class="form-check-input text-white mb-0">
+                              [disabled] = "question.answer != 0"
+                              class="form-check-input text-white mb-0 custom-checkbox">
                             <label
                               [for]="'option' + (i + 1) + '-' + question.id"
                               class="form-check-label text-white mb-0"
