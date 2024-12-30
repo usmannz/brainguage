@@ -82,7 +82,8 @@ var existingPrepTestIdentifier = await _context.PrepTest
         StartDate = DateTime.UtcNow,
         EndDate = currentTimeUtc.AddMinutes(5),
         Answer = 0,  // Default answer (unanswered)
-        IsSubmitted = false  // PrepTest not submitted yet
+        IsSubmitted = false,  // PrepTest not submitted yet
+         IsFlag = false 
             }).ToList();
 
             await _context.PrepTest.AddRangeAsync(userPrepTestzes);
@@ -122,19 +123,21 @@ var existingPrepTestIdentifier = await _context.PrepTest
         .ToListAsync();
 
     // Create a dictionary of submitted answers for quick lookup
-    var answerDict = response.ToDictionary(a => a.QuestionsId, a => a.Answer);
+var answerDict = response.ToDictionary(a => a.QuestionsId, a => new { a.Answer, a.IsFlag });
 
-    // Update the UserPrepTest records in memory
-    foreach (var userPrepTest in userPrepTestList)
+// Update the UserPrepTest records in memory
+foreach (var userPrepTest in userPrepTestList)
+{
+    if (answerDict.TryGetValue(userPrepTest.QuestionsId, out var entry))
     {
-        if (answerDict.TryGetValue(userPrepTest.QuestionsId, out var answer))
-        {
-            userPrepTest.Answer = answer;
-            userPrepTest.UpdateStamp = DateTime.UtcNow;
-            userPrepTest.UpdatedBy = userId;
-            userPrepTest.IsSubmitted = true;
-        }
+        userPrepTest.Answer = entry.Answer;
+        userPrepTest.IsFlag = entry.IsFlag; // Update the Flag field
+        userPrepTest.UpdateStamp = DateTime.UtcNow;
+        userPrepTest.UpdatedBy = userId;
+        userPrepTest.IsSubmitted = true;
     }
+}
+
 
     // Save all changes in one call
     await _context.SaveChangesAsync();
@@ -305,6 +308,7 @@ var existingPrepTestIdentifier = await _context.PrepTest
                 Answer = 0, // To be answered by the user later
                 PrepIdentifier = prepIdentifier,
                 IsSubmitted = false,
+                IsFlag = false,
                 StartDate = DateTime.UtcNow,
                 IsDeleted = false,
                 CreateStamp = DateTime.UtcNow,
@@ -403,6 +407,8 @@ var existingPrepTestData = await _context.PrepTest
             IsSubmitted = ptc.IsSubmitted,  // TimeBox from PrepTestConfig
             PictureUrl = combined.q.PictureUrl,
             ResultEnd = ptc.ResultEnd,
+            IsFlag = combined.uq.IsFlag,
+
         })
     .ToListAsync();
 

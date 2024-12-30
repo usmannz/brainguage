@@ -20,6 +20,7 @@ namespace FRCSPreparationPortal.Common.Entities
         public int QuestionsId { get; set; }
         public int Answer { get; set; } =0;
         public bool IsSubmitted { get; set; } = false;  // default to false
+        public bool IsFlag { get; set; } = false;  // default to false
         public bool IsDeleted { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -58,6 +59,7 @@ namespace FRCSPreparationPortal.Common.Entities
         public int TimeBox { get; set; } = 0;
         public bool ResultEnd { get; set; } = false;
         public bool IsSubmitted { get; set; } = false;  // default to false
+        public bool IsFlag { get; set; } = false;  // default to false
         public int TimeLeft { get; set; } = 0;
     }
 }

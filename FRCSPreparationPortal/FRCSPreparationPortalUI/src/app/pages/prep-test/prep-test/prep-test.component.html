@@ -54,6 +54,7 @@
                 <h3 class="font-weight-normal text-white mb-0">{{pager.index + 1}}.
                   <span [innerHTML]="question.question"></span>
                 </h3>
+                <button type="button" class="btn btn-warning" [(ngModel)]="question.isFlag" (click)="question.isFlag = !question.isFlag">{{ question.isFlag ? 'Unflag' : 'Flag' }}</button>
                 <div *ngIf="question.pictureWebPath">
                   <img [src]="question.pictureWebPath" alt="Current Question Image" style="max-width: 400px; max-height: 400px;" />
                 </div>
@@ -106,7 +107,8 @@
           
             <div class="row text-center" *ngIf="mode=='review'">
               <div class="col-4 cursor-pointer" *ngFor="let question of listQuiz; let index = index;">
-                <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == true? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
+                <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == true? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }} <i  *ngIf="question.isFlag" class="fa fa-flag" aria-hidden="true"></i> <!-- Flag Icon -->
+                </div>
               </div>
             </div>
             <div class="result" *ngIf="mode=='result'">
