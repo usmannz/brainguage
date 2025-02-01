@@ -24,4 +24,8 @@ export class UserService {
         return this._http.post<any>(`${Settings.apiBase}users/signUpUser`,signUp);
     }
 
+    createStripeSession(userId: number): Observable<any> {
+        return this._http.post<any>(`${Settings.apiBase}users/create-session`,userId);
+    }
+
 }

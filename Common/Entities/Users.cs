@@ -14,6 +14,7 @@ public class Users : IEntity
         public int Id { get; set; }
         public string FirstName { get; set; } 
         public string LastName { get; set; } 
+        public int ProductsId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string? Address { get; set; } 
@@ -61,11 +62,19 @@ public class Users : IEntity
      public class SignUp
     {
         public int Id { get; set; }
+        public int ProductsId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public int StatusId { get; set; }
     }
+
+    	public class StripeSettings
+	{
+            public string SecretKey { get; set; }
+            public string PublicKey { get; set; }
+		 // public string WHSecret { get; set; }
+	}
 
 }

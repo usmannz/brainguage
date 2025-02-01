@@ -86,7 +86,15 @@ namespace FRCSPreparationPortal.Repository
             return user.Id;
         }
 
+        public async Task<Users> GetUserById(int userId)
+        {
 
+            var user = await _context.Users
+                .Where(x => x.Id == userId && !x.IsDeleted)
+                .AsNoTracking().FirstOrDefaultAsync();
+            return user;
+
+        }
 
 
     }

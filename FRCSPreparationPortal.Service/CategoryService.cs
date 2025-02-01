@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FRCSPreparationPortal.Repository;
 
 namespace FRCSPreparationPortal.Service
 {
@@ -126,6 +127,32 @@ namespace FRCSPreparationPortal.Service
             
             //var listUsers = await _userRepository.GetAllUsers();
             //return await Task.FromResult<ApiResponse<List<Users>>>(listUsers);
+        }
+
+        public async Task<ApiResponse<List<Products>>> GetAllProducts()
+        {
+            try
+            {
+                var listProducts = await _categoryRepository.GetAllProducts();
+                return new ApiResponse<List<Products>>
+                {
+                    Status = new ApiResponseStatus { Code = 200, Message = "Success" },
+                    Data = listProducts
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponse<List<Products>>
+                {
+                    Status = new ApiResponseStatus { Code = 500, Message = "Internal Server Error" },
+                    Data = new List<Products>() // Return an empty list in case of error
+                };
+            }
+        }
+
+        public async Task<Products> GetProductById(int productId)
+        {
+            return await _categoryRepository.GetProductById(productId);
         }
     }
 }

@@ -30,5 +30,9 @@ export class CategoriesService {
         return this._http.get<any>(`${Settings.apiBase}categories/getAllDropDownCategories`);
     }
 
+    getAllDropDownProducts(): Observable<any> {
+        return this._http.get<any>(`${Settings.apiBase}categories/getAllProducts`);
+    }
+
 
 }

@@ -12,6 +12,8 @@ namespace FRCSPreparationPortal.Service.Contracts
     {
     Task<Users> Authenticate(string email, string password);
     Task<ApiResponse<List<UserDropDown>>> GetAllDropDownUsers();
-    Task<ApiResponse<int>> SignUpUser(SignUp signUp);   
+    Task<ApiResponse<int>> SignUpUser(SignUp signUp);
+    Task<Users> GetUserById(int userId);
+
     }
 }

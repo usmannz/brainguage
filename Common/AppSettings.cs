@@ -158,7 +158,7 @@ namespace FRCSPreparationPortal.Common
         public static string LicenseTypeTrial => Configuration["AppSettings:license-type-trial"];
 
         public static string StripePublicKey => Configuration["AppSettings:StripeSettings:PublicKey"];
-        public static string StripeWHKey => Configuration["AppSettings:StripeSettings:WHSecret"];
+        // public static string StripeWHKey => Configuration["AppSettings:StripeSettings:WHSecret"];
  //public static MailSettings MailSettings
  //   {
  //       get

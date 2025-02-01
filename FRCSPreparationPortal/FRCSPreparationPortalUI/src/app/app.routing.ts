@@ -12,6 +12,8 @@ import { MockTestComponent } from './pages/mock-test/mock-test.component';
 import { DemoTestComponent } from './pages/demo-test/demo-test.component';
 import { PrepTestListingComponent } from './pages/prep-test/prep-test-listing/prep-test-listing.component';
 import { PrepTestComponent } from './pages/prep-test/prep-test/prep-test.component';
+import { MembershipSuccessComponent } from './pages/membership-success/membership-success.component';
+import { MembershipFailureComponent } from './pages/membership-failure/membership-failure.component';
 
 const routes: Routes =[
   // { path: 'dashboard', pathMatch: 'full', component: DashboardComponent,canActivate: [AuthGuard]  },
@@ -21,7 +23,8 @@ const routes: Routes =[
   { path: 'demo-test', pathMatch: 'full', component: DemoTestComponent,canActivate: [AuthGuard]  },
   { path: 'prep-test-listing', pathMatch: 'full', component: PrepTestListingComponent,canActivate: [AuthGuard]  },
   { path: 'prep-test/:prepTestConfigId', pathMatch: 'full', component: PrepTestComponent,canActivate: [AuthGuard]  },
-
+  { path: 'success', component: MembershipSuccessComponent },
+  { path: 'failure', component: MembershipFailureComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: LoginComponent,canActivate: [AuthGuard] },

@@ -60,3 +60,10 @@ export class SignUp {
     password: string;
     statusId: number;                                                     
 }
+
+
+export interface ISession {
+    sessionId: string;
+    publicKey: string;
+  }
+  

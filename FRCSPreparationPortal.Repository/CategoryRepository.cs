@@ -141,5 +141,27 @@ public async Task<int> SaveCategory(Categories category)
 
         }
 
+        public async Task<List<Products>> GetAllProducts()
+        {
+            List<Products> listProducts = new List<Products>();
+
+            listProducts = await _context.Products
+                .Where(x => !x.IsDeleted)
+                .AsNoTracking().ToListAsync();
+
+            return listProducts;
+
+        }
+
+        public async Task<Products> GetProductById(int productId)
+        {
+
+            var product = await _context.Products
+                .Where(x => x.Id == productId && !x.IsDeleted)
+                .AsNoTracking().FirstOrDefaultAsync();
+            return product;
+
+        }
+
     }
 }

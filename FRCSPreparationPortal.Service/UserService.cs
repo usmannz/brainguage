@@ -72,6 +72,7 @@ namespace FRCSPreparationPortal.Service
             user.Password = user.Password = Encryption.Encrypt(signUp.Password.Trim());
             user.CreateStamp = user.CreateStamp = DateTime.UtcNow;
             user.StatusId = (int)UserStatus.Active;
+            user.ProductsId = signUp.ProductsId;
              try
             {
             var licenseid = await _userRepository.SignUpUser(user);
@@ -91,5 +92,11 @@ namespace FRCSPreparationPortal.Service
             }
 
         }
+
+        public async Task<Users> GetUserById(int userId)
+        {
+            return await _userRepository.GetUserById(userId);
+        }
+
     }
 }

@@ -43,6 +43,8 @@ import { DemoTestComponent } from './pages/demo-test/demo-test.component';
 import { PrepTestListingComponent } from './pages/prep-test/prep-test-listing/prep-test-listing.component';
 import { PrepTestConfigComponent } from './pages/prep-test/prep-test-config/prep-test-config.component';
 import { PrepTestComponent } from './pages/prep-test/prep-test/prep-test.component';
+import { MembershipSuccessComponent } from './pages/membership-success/membership-success.component';
+import { MembershipFailureComponent } from './pages/membership-failure/membership-failure.component';
 
 
 @NgModule({
@@ -90,7 +92,10 @@ import { PrepTestComponent } from './pages/prep-test/prep-test/prep-test.compone
     CategoryEditComponent,
     PrepTestListingComponent,
     PrepTestConfigComponent,
-    PrepTestComponent
+    PrepTestComponent,
+    MembershipSuccessComponent,
+    MembershipFailureComponent,
+
 
 
   ],

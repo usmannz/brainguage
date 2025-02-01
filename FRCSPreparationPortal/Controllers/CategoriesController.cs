@@ -6,6 +6,7 @@ using FRCSPreparationPortal.Common;
 using FRCSPreparationPortal.Common.Entities;
 using FRCSPreparationPortal.Common.Models;
 using FRCSPreparationPortal.Service.Contracts;
+using FRCSPreparationPortal.Service;
 
 namespace FRCSPreparationPortal.Controllers
 {
@@ -45,6 +46,19 @@ namespace FRCSPreparationPortal.Controllers
         {
             return await _categoryService.GetAllDropDownCategories();
 
+        }
+        [AllowAnonymous]
+        [HttpGet("GetAllProducts")]
+        public async Task<ApiResponse<List<Products>>> GetAllProducts()
+        {
+            return await _categoryService.GetAllProducts();
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetProductById")]
+        public async Task<Products> GetProductById(int productId)
+        {
+            return await _categoryService.GetProductById(productId);
         }
 
     }

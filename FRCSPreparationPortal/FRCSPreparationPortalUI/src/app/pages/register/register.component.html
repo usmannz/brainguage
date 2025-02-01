@@ -63,6 +63,7 @@
                   Maximum of 450 characters are allowed
               </div>
               </div>
+            
             <div class="form-group">
                 <input type="text" class="form-control" id="lastName" formControlName="lastName"
                 placeholder="Enter your last name" [ngClass]="{ error: submitted && mysignUpForm.lastName.errors }"
@@ -74,6 +75,21 @@
                 Maximum of 450 characters are allowed
             </div>            
             </div>
+            <div class="form-group">
+              <select class="custom-select" id="productsId" formControlName="productsId">
+                  <option [value]=0>Choose product</option>
+                  <ng-container *ngFor="let prod of listProducts">
+                      <option [value]=prod.id>{{prod.name}}</option>
+                  </ng-container>
+              </select>
+              <!-- error block -->
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.productsId.errors?.required">
+                  Product is required
+              </div>
+              <div class="invalid-feedback" *ngIf="submitted && mysignUpForm.productsId.errors?.min">
+                Product is required
+              </div>
+          </div>
             <div class="form-group">
                 <input type="text" class="form-control" id="email" formControlName="email"
                 placeholder="Enter email" [ngClass]="{ error: submitted && mysignUpForm.email.errors }"

@@ -14,5 +14,7 @@ namespace FRCSPreparationPortal.Repository.Contracts
     Task<Users> Authenticate(string email, string password);
     Task<List<UserDropDown>> GetAllDropDownUsers();
     Task<int> SignUpUser(Users user);
+    Task<Users> GetUserById(int userId);
+
     }
 }

@@ -16,6 +16,7 @@ using StackExchange.Redis.Extensions.Newtonsoft;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Stripe;
 
 namespace FRCSPreparationPortal.API
 {
@@ -51,6 +52,7 @@ namespace FRCSPreparationPortal.API
             services.AddSwaggerGen();
 
             var constr = Configuration.GetConnectionString("Default");
+			StripeConfiguration.ApiKey = Configuration.GetValue<string>("AppSettings:StripeSettings:SecretKey");
 
             //services.AddDbContext<DBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
             //services.AddDbContext<DBContext>(options => options.UseMySql(constr, ServerVersion.AutoDetect(constr)), ServiceLifetime.Transient);

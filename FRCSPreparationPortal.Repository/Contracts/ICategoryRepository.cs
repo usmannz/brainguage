@@ -15,5 +15,8 @@ namespace FRCSPreparationPortal.Repository.Contracts
     Task<int> SaveCategory(Categories category);
     Task<int> DeleteCategory(int categoryId, int deletedBy);
     Task<List<Categories>> GetAllDropDownCategories();
+    Task<List<Products>> GetAllProducts();
+    Task<Products> GetProductById(int productId);
+
     }
 }

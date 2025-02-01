@@ -20,8 +20,7 @@ namespace FRCSPreparationPortal.Repository
         public virtual DbSet<PrepTest> PrepTest { get; set; }
         public virtual DbSet<PrepTestConfig> PrepTestConfig { get; set; }
         public virtual DbSet<PrepTestConfigCategory> PrepTestConfigCategory { get; set; }
-
-
+        public virtual DbSet<Products> Products { get; set; }
         public DBContext()
     {
 
